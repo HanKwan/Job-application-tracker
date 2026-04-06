@@ -1,0 +1,42 @@
+.app-item {
+  display: flex;
+  align-items: center;
+  background-color: #1e1e1e;
+  padding: 12px 16px;
+  margin-bottom: 8px;
+  border-radius: 8px;
+  color: white;
+}
+
+.app-item span {
+  flex: 1;
+}
+
+.actions {
+  display: flex;
+  gap: 8px;
+}
+
+.edit-btn {
+  background-color: #3b82f6;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-btn {
+  background-color: #ef4444;
+  border: none;
+  padding: 6px 10px;
+  border-radius: 6px;
+  color: white;
+  cursor: pointer;
+}
+
+/* Status colors */
+.status.applied { color: #9ca3af; }
+.status.interview { color: #f59e0b; }
+.status.offer { color: #22c55e; }
+.status.rejected { color: #ef4444; }
