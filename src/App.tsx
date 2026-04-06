@@ -1,4 +1,4 @@
-import JobCard from './components/jobCard'
+import JobCard from './components/ApplicationItem'
 import './css/App.css'
 
 function App() {
