@@ -10,10 +10,10 @@ const ApplicationItem = ({ app }: ApplicationProps) => {
 
     return (
         <div className="app-item">
-            <span className="company">Google</span>
-            <span className="position">Frontend Dev</span>
-            <span className="status applied">Applied</span>
-            <span className="date">2026-04-06</span>
+            <span className="company">{app.company}</span>
+            <span className="position">{app.position}</span>
+            <span className="status applied">{app.status}</span>
+            <span className="date">{app.date}</span>
 
             <div className="actions">
                 <button className="edit-btn">Edit</button>
