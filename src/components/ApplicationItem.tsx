@@ -1,6 +1,11 @@
 import "../css/AppItem.css"
+import type { AppItem } from "../types/AppType"
 
-const JobCard = ({}) => {
+interface ApplicationProps {
+    app: AppItem
+}
+
+const ApplicationItem = ({ app }: ApplicationProps) => {
 
 
     return (
@@ -18,4 +23,4 @@ const JobCard = ({}) => {
     )
 }
 
-export default JobCard
+export default ApplicationItem
