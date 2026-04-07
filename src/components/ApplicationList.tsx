@@ -1,5 +1,6 @@
 import ApplicationItem from "./ApplicationItem"
 import type { AppItem } from "../types/AppType"
+import "../css/AppList.css"
 
 interface ApplicationProps {
     applications: AppItem[]
@@ -8,8 +9,8 @@ interface ApplicationProps {
 const ApplicationList = ({ applications }: ApplicationProps) => {
 
     return (
-        <div>
-            <div>
+        <div className="app-list">
+            <div className="app-list-header">
                 <span>Company</span>
                 <span>Position</span>
                 <span>Status</span>

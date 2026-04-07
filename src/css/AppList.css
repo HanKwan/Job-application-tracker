@@ -1,0 +1,19 @@
+.app-list {
+  width: 100%;
+  max-width: 800px;
+  margin: 0 auto;
+  font-family: sans-serif;
+}
+
+.app-list-header {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px 12px;
+  border-bottom: 1px solid #ddd;
+  align-items: center;
+}
+
+.app-list-header {
+  font-weight: bold;
+  background-color: #f0f0f0;
+}
