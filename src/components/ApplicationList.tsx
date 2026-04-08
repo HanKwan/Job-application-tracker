@@ -17,7 +17,9 @@ const ApplicationList = ({ applications }: ApplicationProps) => {
                 <span>Date</span>
                 <span>Actions</span>
             </div>
-            {applications.map(app => <ApplicationItem key={app.id} app={app}/>)}
+            {applications.map(app => 
+                <ApplicationItem key={app.id} app={app}/>
+            )}
         </div>
     )
 
