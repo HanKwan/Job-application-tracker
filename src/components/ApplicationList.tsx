@@ -4,9 +4,10 @@ import "../css/AppList.css"
 
 interface ApplicationProps {
     applications: AppItem[]
+    onUpdate: (updatedApp: AppItem) => void
 }
 
-const ApplicationList = ({ applications }: ApplicationProps) => {
+const ApplicationList = ({ applications, onUpdate }: ApplicationProps) => {
 
     return (
         <div className="app-list">
@@ -15,10 +16,10 @@ const ApplicationList = ({ applications }: ApplicationProps) => {
                 <span>Position</span>
                 <span>Status</span>
                 <span>Date</span>
-                <span className="action-header">Actions</span>
+                <span>Actions</span>
             </div>
             {applications.map(app => 
-                <ApplicationItem key={app.id} app={app}/>
+                <ApplicationItem key={app.id} app={app} onUpdate={onUpdate}/>
             )}
         </div>
     )

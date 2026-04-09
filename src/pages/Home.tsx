@@ -4,16 +4,21 @@ import ApplicationList from "../components/ApplicationList"
 import type { AppItem } from "../types/AppType"
 
 function Home () {
-    const [apps, setApps] = useState<AppItem[]>([])
+    const [applications, setApplications] = useState<AppItem[]>([])
     
     const handleAdd = (newApp: AppItem) => {
-        setApps(prev => [...prev, newApp])
+        setApplications(prev => [...prev, newApp])
+    }
+
+    const handleUpdate = (updatedApp: AppItem) => {
+        setApplications(prev => prev.map(app => 
+            app.id === updatedApp.id ? updatedApp : app))
     }
 
     return (
         <>
             <ApplicationForm onAdd={handleAdd}/>
-            <ApplicationList applications={apps}/>
+            <ApplicationList applications={applications} onUpdate={handleUpdate}/>
         </>
 
     )

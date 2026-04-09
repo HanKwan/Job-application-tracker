@@ -3,16 +3,22 @@ import type { AppItem } from "../types/AppType"
 
 interface ApplicationProps {
     app: AppItem
+    onUpdate: (updatedApp: AppItem) => void
 }
 
 const ApplicationItem = ({ app }: ApplicationProps) => {
 
+    
 
     return (
         <div className="app-item">
             <span className="company">{app.company}</span>
             <span className="position">{app.position}</span>
-            <span className="status applied">{app.status}</span>
+            
+            <div className="status applied">
+                {}
+            </div>
+            
             <span className="date">{app.date}</span>
 
             <div className="actions">
