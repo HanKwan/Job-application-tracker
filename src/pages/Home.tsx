@@ -1,24 +1,19 @@
+import { useState } from "react"
 import ApplicationForm from "../components/ApplicationForm"
 import ApplicationList from "../components/ApplicationList"
 import type { AppItem } from "../types/AppType"
 
 function Home () {
-
-    const applications: AppItem[] = [
-    {
-        id: 1,
-        company: "Google",
-        position: "Frontend Dev",
-        status: "Applied",
-        date: "2026-04-06"
+    const [apps, setApps] = useState<AppItem[]>([])
+    
+    const handleAdd = (newApp: AppItem) => {
+        setApps(prev => [...prev, newApp])
     }
-    ]
-
 
     return (
         <>
-            <ApplicationForm />
-            <ApplicationList applications={applications}/>
+            <ApplicationForm onAdd={handleAdd}/>
+            <ApplicationList applications={apps}/>
         </>
 
     )
