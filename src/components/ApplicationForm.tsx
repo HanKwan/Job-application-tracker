@@ -1,5 +1,6 @@
 import React, { useState } from "react"
 import type { AppItem } from "../types/AppType"
+import "../css/AppForm.css"
 
 type Props = {
     onAdd: (app: AppItem) => void

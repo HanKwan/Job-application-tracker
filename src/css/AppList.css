@@ -17,3 +17,8 @@
   font-weight: bold;
   background-color: #f0f0f0;
 }
+
+.app-list-header span {
+    padding-right: 50px;
+}
+
