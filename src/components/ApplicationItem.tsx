@@ -6,18 +6,29 @@ interface ApplicationProps {
     onUpdate: (updatedApp: AppItem) => void
 }
 
-const ApplicationItem = ({ app }: ApplicationProps) => {
+const ApplicationItem = ({ app, onUpdate }: ApplicationProps) => {
 
-    
+    const statuses = ["applied", "interview", "offer", "reject"]
+
+    const handleUpdateStatus = (status: string) => {
+        const update = {...app, status: status}
+
+        onUpdate(update)
+    }
 
     return (
         <div className="app-item">
             <span className="company">{app.company}</span>
             <span className="position">{app.position}</span>
             
-            <div className="status applied">
-                {}
-            </div>
+            <select className={`status-${app.status}`}>
+                {statuses.map(s => (
+                    <option key={s} 
+                            onClick={() => handleUpdateStatus(s)}>
+                                {s}
+                    </option>
+                ))}
+            </select>
             
             <span className="date">{app.date}</span>
 
