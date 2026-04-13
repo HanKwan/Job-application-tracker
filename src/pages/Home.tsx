@@ -1,29 +1,27 @@
-import { useState } from "react"
 import ApplicationForm from "../components/ApplicationForm"
 import ApplicationList from "../components/ApplicationList"
 import type { AppItem } from "../types/AppType"
 import "../css/Home.css"
+import { useApplication } from "../contexts/AppliedApplicationContext"
 
 function Home () {
-    const [applications, setApplications] = useState<AppItem[]>([])
+    const {appliedApp, addApplication} = useApplication()
     
     const handleAdd = (newApp: AppItem) => {
-        setApplications(prev => [...prev, newApp])
+        addApplication(newApp)
     }
 
     const handleUpdate = (updatedApp: AppItem) => {
-        setApplications(prev => prev.map(app => 
-            app.id === updatedApp.id ? updatedApp : app))
+
     }
-    console.log(applications);
+    console.log(appliedApp);
     
 
     return (
-        <form className="container">
+        <div className="container">
             <ApplicationForm onAdd={handleAdd}/>
-            <ApplicationList applications={applications} onUpdate={handleUpdate}/>
-        </form>
-
+            <ApplicationList applications={appliedApp} onUpdate={handleUpdate}/>
+        </div>
     )
 }
 

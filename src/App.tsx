@@ -1,15 +1,13 @@
+import { AppliedProvider } from './contexts/AppliedApplicationContext'
 import './css/App.css'
 import Home from './pages/Home'
 
 function App() {
 
-  
-
   return (
-    <>
-      <p>hi from app</p>
+    <AppliedProvider>
       <Home />
-    </>
+    </AppliedProvider>
 
   )
 }
