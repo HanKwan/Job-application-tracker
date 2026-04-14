@@ -18,16 +18,10 @@ export const useApplication = () => {
 export const AppliedProvider = ({children}: {children: React.ReactNode}) => {
     const [appliedApp, setAppliedApp] = useState<AppItem[]>([])
 
-    useEffect(() => {
-        const storedApplied = localStorage.getItem("applied")
-        if (storedApplied) {
-            setAppliedApp(JSON.parse(storedApplied))
-        }
-    }, [])
+    console.log(appliedApp);
+    
 
-    useEffect(() => {
-        localStorage.setItem("applied", JSON.stringify(appliedApp))
-    }, [appliedApp])
+    
 
     const addApplication = (newApplication: AppItem) => {
         setAppliedApp(prev => [...prev, newApplication])

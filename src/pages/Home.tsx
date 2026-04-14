@@ -2,20 +2,32 @@ import ApplicationForm from "../components/ApplicationForm"
 import ApplicationList from "../components/ApplicationList"
 import type { AppItem } from "../types/AppType"
 import "../css/Home.css"
-import { useApplication } from "../contexts/AppliedApplicationContext"
+import { useEffect, useState } from "react"
 
 function Home () {
-    const {appliedApp, addApplication} = useApplication()
+    const [appliedApp, setAppliedApp] = useState<AppItem[]>(() => {
+        const stored = localStorage.getItem("applied")
+        if (!stored) return []
+
+        try {
+            const parsed = JSON.parse(stored)
+            return Array.isArray(parsed) ? parsed : []
+        } catch {
+            return []
+        }
+    })
     
+    useEffect(() => {
+            localStorage.setItem("applied", JSON.stringify(appliedApp))
+        }, [appliedApp])
+
     const handleAdd = (newApp: AppItem) => {
-        addApplication(newApp)
+        setAppliedApp(prev => [...prev, newApp])
     }
 
     const handleUpdate = (updatedApp: AppItem) => {
 
-    }
-    console.log(appliedApp);
-    
+    }    
 
     return (
         <div className="container">
