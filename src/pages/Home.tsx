@@ -16,6 +16,8 @@ function Home () {
             return []
         }
     })
+    console.log(appliedApp);
+    
     
     useEffect(() => {
             localStorage.setItem("applied", JSON.stringify(appliedApp))
@@ -25,8 +27,10 @@ function Home () {
         setAppliedApp(prev => [...prev, newApp])
     }
 
-    const handleUpdate = (updatedApp: AppItem) => {
-
+    const handleUpdate = (id: number, updatedStatus: string) => {
+        setAppliedApp(prev => prev.map(
+            app => app.id === id ? {...app, status: updatedStatus} : app
+        ))
     }    
 
     return (

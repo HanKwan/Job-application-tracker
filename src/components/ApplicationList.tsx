@@ -4,7 +4,7 @@ import "../css/AppList.css"
 
 interface ApplicationProps {
     applications: AppItem[]
-    onUpdate: (updatedApp: AppItem) => void
+    onUpdate: (id: number, updatedApp: string) => void
 }
 
 const ApplicationList = ({ applications, onUpdate }: ApplicationProps) => {

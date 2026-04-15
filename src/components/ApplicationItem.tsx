@@ -3,28 +3,29 @@ import type { AppItem } from "../types/AppType"
 
 interface ApplicationProps {
     app: AppItem
-    onUpdate: (updatedApp: AppItem) => void
+    onUpdate: (id: number, updatedApp: string) => void
 }
 
 const ApplicationItem = ({ app, onUpdate }: ApplicationProps) => {
 
     const statuses = ["applied", "interview", "offer", "reject"]
 
-    const handleUpdateStatus = (status: string) => {
-        const update = {...app, status: status}
+    // const handleUpdateStatus = (id: number, status: string) => {
+    //     const update = {id, status}
 
-        onUpdate(update)
-    }
+    //     onUpdate(update)
+    // }
+    // console.log(app.status)
 
     return (
         <div className="app-item">
             <span className="company">{app.company}</span>
             <span className="position">{app.position}</span>
             
-            <select className={`status-${app.status}`}>
+            <select className={`status-${app.status}`} value={app.status} onChange={(e) => onUpdate(app.id, e.target.value)}>
                 {statuses.map(s => (
                     <option key={s} 
-                            onClick={() => handleUpdateStatus(s)}>
+                            value={s}>
                                 {s}
                     </option>
                 ))}
