@@ -8,11 +8,12 @@ type Props = {
 
 const ApplicationForm = (props: Props) => {
     const onAdd = props.onAdd
+    const today = new Date().toLocaleDateString("sv-SE")
 
     const [newCompany, setNewCompany] = useState("")
     const [position, setPosition] = useState("")
     const [status, setStatus] = useState("applied")
-    const [date, setDate] = useState("")
+    const [date, setDate] = useState(today)
 
     const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -24,7 +25,7 @@ const ApplicationForm = (props: Props) => {
             company: newCompany,
             position,
             status,
-            date
+            date: today
         }
 
         onAdd(newApp)
@@ -32,7 +33,7 @@ const ApplicationForm = (props: Props) => {
         setNewCompany("")
         setPosition("")
         setStatus("applied")
-        setDate("")
+        setDate(today)
     }
 
     return (
@@ -58,7 +59,7 @@ const ApplicationForm = (props: Props) => {
 
             <input type="date" 
                     value={date}
-                    onChange={(e) => setDate(e.target.value)}/>
+                    onChange={() => setDate(today)}/>
 
             <button type="submit">Add</button>
         </form>

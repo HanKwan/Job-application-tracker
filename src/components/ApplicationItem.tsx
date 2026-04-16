@@ -32,7 +32,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete }: ApplicationProps) => {
 
             <div className="actions">
                 <button className="edit-btn">Edit</button>
-                <button className="delete-btn" onClick={(e) => onDelete(app.id)}>Delete</button>
+                <button className="delete-btn" onClick={() => onDelete(app.id)}>Delete</button>
             </div>
         </div>
     )
