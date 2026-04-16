@@ -5,6 +5,7 @@ import "../css/Home.css"
 import { useEffect, useState } from "react"
 
 function Home () {
+
     const [appliedApp, setAppliedApp] = useState<AppItem[]>(() => {
         const stored = localStorage.getItem("applied")
         if (!stored) return []
@@ -27,20 +28,22 @@ function Home () {
         setAppliedApp(prev => [...prev, newApp])
     }
 
-    const handleUpdate = (id: number, updatedStatus: string) => {
-        setAppliedApp(prev => prev.map(
-            app => app.id === id ? {...app, status: updatedStatus} : app
-        ))
-    }
-
     const handleDelete = (id: number) => {
         setAppliedApp(prev => prev.filter(a => a.id !== id))
     }
 
+    const handleUpdate = (id: number, editedApplication: Partial<AppItem>) => {
+        setAppliedApp(prev => prev.map(app => 
+            app.id === id ? {...app, ...editedApplication} : app))
+    }
+
     return (
         <div className="container">
-            <ApplicationForm onAdd={handleAdd}/>
-            <ApplicationList applications={appliedApp} onUpdate={handleUpdate} onDelete={handleDelete}/>
+            <ApplicationForm onAdd={handleAdd}/> 
+
+            <ApplicationList applications={appliedApp} 
+                             onUpdate={handleUpdate} 
+                             onDelete={handleDelete}/>
         </div>
     )
 }

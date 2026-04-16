@@ -3,7 +3,7 @@ import type { AppItem } from "../types/AppType"
 
 interface ApplicationProps {
     app: AppItem
-    onUpdate: (id: number, updatedApp: string) => void
+    onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
     onDelete: (id: number) => void
 }
 
@@ -18,7 +18,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete }: ApplicationProps) => {
             
             <select className={`status-${app.status}`} 
                     value={app.status} 
-                    onChange={(e) => onUpdate(app.id, e.target.value)}>
+                    onChange={(e) => onUpdate(app.id, {status: e.target.value})}>
 
                 {statuses.map(s => (
                     <option key={s} 

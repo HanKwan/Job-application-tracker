@@ -25,7 +25,7 @@ const ApplicationForm = (props: Props) => {
             company: newCompany,
             position,
             status,
-            date: today
+            date: date
         }
 
         onAdd(newApp)
@@ -59,7 +59,7 @@ const ApplicationForm = (props: Props) => {
 
             <input type="date" 
                     value={date}
-                    onChange={() => setDate(today)}/>
+                    onChange={(e) => setDate(e.target.value)}/>
 
             <button type="submit">Add</button>
         </form>
