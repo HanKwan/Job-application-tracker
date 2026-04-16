@@ -5,9 +5,10 @@ import "../css/AppList.css"
 interface ApplicationProps {
     applications: AppItem[]
     onUpdate: (id: number, updatedApp: string) => void
+    onDelete: (id: number) => void
 }
 
-const ApplicationList = ({ applications, onUpdate }: ApplicationProps) => {
+const ApplicationList = ({ applications, onUpdate, onDelete }: ApplicationProps) => {
 
     return (
         <div className="app-list">
@@ -19,7 +20,7 @@ const ApplicationList = ({ applications, onUpdate }: ApplicationProps) => {
                 <span>Actions</span>
             </div>
             {applications.map(app => 
-                <ApplicationItem key={app.id} app={app} onUpdate={onUpdate}/>
+                <ApplicationItem key={app.id} app={app} onUpdate={onUpdate} onDelete={onDelete}/>
             )}
         </div>
     )

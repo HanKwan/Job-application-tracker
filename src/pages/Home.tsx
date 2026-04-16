@@ -31,12 +31,16 @@ function Home () {
         setAppliedApp(prev => prev.map(
             app => app.id === id ? {...app, status: updatedStatus} : app
         ))
-    }    
+    }
+
+    const handleDelete = (id: number) => {
+        setAppliedApp(prev => prev.filter(a => a.id !== id))
+    }
 
     return (
         <div className="container">
             <ApplicationForm onAdd={handleAdd}/>
-            <ApplicationList applications={appliedApp} onUpdate={handleUpdate}/>
+            <ApplicationList applications={appliedApp} onUpdate={handleUpdate} onDelete={handleDelete}/>
         </div>
     )
 }

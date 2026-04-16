@@ -4,25 +4,22 @@ import type { AppItem } from "../types/AppType"
 interface ApplicationProps {
     app: AppItem
     onUpdate: (id: number, updatedApp: string) => void
+    onDelete: (id: number) => void
 }
 
-const ApplicationItem = ({ app, onUpdate }: ApplicationProps) => {
+const ApplicationItem = ({ app, onUpdate, onDelete }: ApplicationProps) => {
 
     const statuses = ["applied", "interview", "offer", "reject"]
-
-    // const handleUpdateStatus = (id: number, status: string) => {
-    //     const update = {id, status}
-
-    //     onUpdate(update)
-    // }
-    // console.log(app.status)
 
     return (
         <div className="app-item">
             <span className="company">{app.company}</span>
             <span className="position">{app.position}</span>
             
-            <select className={`status-${app.status}`} value={app.status} onChange={(e) => onUpdate(app.id, e.target.value)}>
+            <select className={`status-${app.status}`} 
+                    value={app.status} 
+                    onChange={(e) => onUpdate(app.id, e.target.value)}>
+
                 {statuses.map(s => (
                     <option key={s} 
                             value={s}>
@@ -35,7 +32,7 @@ const ApplicationItem = ({ app, onUpdate }: ApplicationProps) => {
 
             <div className="actions">
                 <button className="edit-btn">Edit</button>
-                <button className="delete-btn">Delete</button>
+                <button className="delete-btn" onClick={(e) => onDelete(app.id)}>Delete</button>
             </div>
         </div>
     )
