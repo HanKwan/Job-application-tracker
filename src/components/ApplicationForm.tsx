@@ -4,10 +4,15 @@ import "../css/AppForm.css"
 
 type Props = {
     onAdd: (app: AppItem) => void
+    onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
+    onEditClick?: AppItem | null
 }
 
 const ApplicationForm = (props: Props) => {
     const onAdd = props.onAdd
+    const editingApp = props.onEditClick
+    console.log(editingApp)
+
     const today = new Date().toLocaleDateString("sv-SE")
 
     const [newCompany, setNewCompany] = useState("")

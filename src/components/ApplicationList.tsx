@@ -6,9 +6,10 @@ interface ApplicationProps {
     applications: AppItem[]
     onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
     onDelete: (id: number) => void
+    onEditClick: (app: AppItem) => void 
 }
 
-const ApplicationList = ({ applications, onUpdate, onDelete }: ApplicationProps) => {
+const ApplicationList = ({ applications, onUpdate, onDelete, onEditClick }: ApplicationProps) => {
 
     return (
         <div className="app-list">
@@ -23,7 +24,8 @@ const ApplicationList = ({ applications, onUpdate, onDelete }: ApplicationProps)
                 <ApplicationItem key={app.id} 
                                  app={app} 
                                  onUpdate={onUpdate} 
-                                 onDelete={onDelete}/>
+                                 onDelete={onDelete}
+                                 onEditClick={onEditClick}/>
             )}
         </div>
     )

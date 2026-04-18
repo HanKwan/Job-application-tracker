@@ -5,9 +5,10 @@ interface ApplicationProps {
     app: AppItem
     onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
     onDelete: (id: number) => void
+    onEditClick: (app: AppItem) => void
 }
 
-const ApplicationItem = ({ app, onUpdate, onDelete }: ApplicationProps) => {
+const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationProps) => {
 
     const statuses = ["applied", "interview", "offer", "reject"]
 
@@ -31,7 +32,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete }: ApplicationProps) => {
             <span className="date">{app.date}</span>
 
             <div className="actions">
-                <button className="edit-btn">Edit</button>
+                <button className="edit-btn" onClick={() => onEditClick(app)}>Edit</button>
                 <button className="delete-btn" onClick={() => onDelete(app.id)}>Delete</button>
             </div>
         </div>

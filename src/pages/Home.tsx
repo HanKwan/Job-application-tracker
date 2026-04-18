@@ -19,6 +19,8 @@ function Home () {
     })
     console.log(appliedApp);
     
+    const [editingApp, setEditingApp] = useState<AppItem | null>(null)
+    console.log(editingApp);
     
     useEffect(() => {
             localStorage.setItem("applied", JSON.stringify(appliedApp))
@@ -39,11 +41,14 @@ function Home () {
 
     return (
         <div className="container">
-            <ApplicationForm onAdd={handleAdd}/> 
+            <ApplicationForm onAdd={handleAdd}
+                             onUpdate={handleUpdate}
+                             onEditClick={editingApp}/> 
 
             <ApplicationList applications={appliedApp} 
                              onUpdate={handleUpdate} 
-                             onDelete={handleDelete}/>
+                             onDelete={handleDelete}
+                             onEditClick={setEditingApp}/>
         </div>
     )
 }
