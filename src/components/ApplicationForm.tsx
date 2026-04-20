@@ -1,4 +1,4 @@
-import React, { useState } from "react"
+import React, { useEffect, useState } from "react"
 import type { AppItem } from "../types/AppType"
 import "../css/AppForm.css"
 
@@ -11,6 +11,7 @@ type Props = {
 const ApplicationForm = (props: Props) => {
     const onAdd = props.onAdd
     const editingApp = props.onEditClick
+    const onUpdate = props.onUpdate
     console.log(editingApp)
 
     const today = new Date().toLocaleDateString("sv-SE")
@@ -19,6 +20,15 @@ const ApplicationForm = (props: Props) => {
     const [position, setPosition] = useState("")
     const [status, setStatus] = useState("applied")
     const [date, setDate] = useState(today)
+
+    useEffect(() => {
+            if (editingApp) {
+                setNewCompany(editingApp.company)
+                setPosition(editingApp.position)
+                setStatus(editingApp.status)
+                setDate(editingApp.date)
+            }
+        }, [editingApp])
 
     const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
@@ -33,7 +43,16 @@ const ApplicationForm = (props: Props) => {
             date: date
         }
 
-        onAdd(newApp)
+        if (editingApp) {
+            onUpdate(editingApp.id, {
+                company: newCompany,
+                position,
+                status,
+                date
+            })
+        } else {
+            onAdd(newApp)
+        }
 
         setNewCompany("")
         setPosition("")
@@ -66,7 +85,7 @@ const ApplicationForm = (props: Props) => {
                     value={date}
                     onChange={(e) => setDate(e.target.value)}/>
 
-            <button type="submit">Add</button>
+            <button type="submit">{editingApp ? "Edit" : "Add"}</button>
         </form>
     )
 }
