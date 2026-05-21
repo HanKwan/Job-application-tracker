@@ -1,73 +1,73 @@
-# React + TypeScript + Vite
+# Job Application Tracker
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+就職活動の応募状況を管理するためのReactアプリです。  
+A React app for tracking job applications and application statuses.
 
-Currently, two official plugins are available:
+---
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Oxc](https://oxc.rs)
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/)
+## Features / 主な機能
 
-## React Compiler
+- 求人応募の追加
+- 応募一覧の表示
+- 応募状況の編集
+- 応募データの削除
+- Local Storageによるデータ保存
 
-The React Compiler is not enabled on this template because of its impact on dev & build performances. To add it, see [this documentation](https://react.dev/learn/react-compiler/installation).
+- Add new job applications
+- View application list
+- Edit application status
+- Delete applications
+- Persist data using Local Storage
 
-## Expanding the ESLint configuration
+---
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Components / コンポーネント
 
-```js
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+- AppList
+- AppForm
+- AppItem
 
-      // Remove tseslint.configs.recommended and replace with this
-      tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      tseslint.configs.stylisticTypeChecked,
+---
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
-```
+## Built With / 使用技術
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+- React
+- JavaScript
+- CSS
+- Local Storage API
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+---
 
-export default defineConfig([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+## What I Learned / 学んだこと
+
+- Reactのコンポーネント設計
+- PropsとStateの管理
+- フォーム入力の処理
+- `.map()`を使ったリスト表示
+- Local Storageを使ったデータ保存
+- CRUD機能の実装
+
+- Component-based architecture
+- Props and state management
+- Form handling
+- Rendering lists with `.map()`
+- Persisting data with Local Storage
+- Implementing CRUD features
+
+---
+
+## Future Improvements / 今後追加したい機能
+
+- 検索・フィルター機能
+- ログイン機能
+- Spring Bootとの連携
+- データベース対応
+
+---
+
+## Run Locally
+
+```bash
+npm install
+npm start
 ```
