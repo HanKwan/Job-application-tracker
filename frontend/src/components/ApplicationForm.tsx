@@ -85,15 +85,15 @@ const ApplicationForm = (props: Props) => {
                 <option value="reject">Reject</option>
             </select>
 
+            <input type="date" 
+                    value={applicationDate}
+                    onChange={(e) => setApplicationDate(e.target.value)}/>
+
             <textarea
                 value={note}
                 onChange={(e) => setNote(e.target.value)}
                 placeholder="Notes..."
             />
-
-            <input type="date" 
-                    value={applicationDate}
-                    onChange={(e) => setApplicationDate(e.target.value)}/>
 
             <button type="submit">{editingApp ? "Edit" : "Add"}</button>
         </form>

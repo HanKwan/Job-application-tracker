@@ -14,22 +14,32 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
 
     return (
         <div className="app-item">
-            <span className="company">{app.companyName}</span>
-            <span className="position">{app.position}</span>
-            
-            <select className={`status-${app.status}`} 
-                    value={app.status} 
-                    onChange={(e) => onUpdate(app.id, {status: e.target.value})}>
+            <p><strong>Company's name:</strong> {app.companyName}</p>
 
-                {statuses.map(s => (
-                    <option key={s} 
-                            value={s}>
-                                {s}
-                    </option>
-                ))}
-            </select>
+            <p>
+                <strong>Position:</strong> {app.position} | {" "}
+                <strong>Date:</strong> {app.applicationDate}
+            </p>
+
+            <div className="status-container">
+                <strong>Status:</strong>
             
-            <span className="date">{app.applicationDate}</span>
+                <select className={`status-${app.status}`} 
+                        value={app.status} 
+                        onChange={(e) => onUpdate(app.id, {status: e.target.value})}>
+
+                    {statuses.map(s => (
+                        <option key={s} 
+                                value={s}>
+                                    {s}
+                        </option>
+                    ))}
+                </select>
+            </div>
+            
+            {app.note && (
+                <p className="note">{app.note}</p>
+            )}
 
             <div className="actions">
                 <button className="edit-btn" onClick={() => onEditClick(app)}>Edit</button>

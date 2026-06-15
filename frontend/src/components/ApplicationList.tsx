@@ -13,13 +13,6 @@ const ApplicationList = ({ applications, onUpdate, onDelete, onEditClick }: Appl
 
     return (
         <div className="app-list">
-            <div className="app-list-header">
-                <span>Company</span>
-                <span>Position</span>
-                <span>Status</span>
-                <span>Date</span>
-                <span>Actions</span>
-            </div>
             {applications.map(app => 
                 <ApplicationItem key={app.id} 
                                  app={app} 
