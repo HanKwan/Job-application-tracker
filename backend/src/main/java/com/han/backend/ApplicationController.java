@@ -23,4 +23,9 @@ public class ApplicationController {
     public Application save(@RequestBody Application application) {
         return applicationRepository.save(application);
     }
+
+    @GetMapping("/search/{id}")
+    public Application findById(@PathVariable Long id) {
+        return applicationRepository.findById(id).orElse(null);
+    }
 }
