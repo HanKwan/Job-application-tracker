@@ -1,14 +1,19 @@
 import ApplicationForm from "../components/ApplicationForm"
 import ApplicationList from "../components/ApplicationList"
-import type { AppItem } from "../types/AppType"
+import type { AppItem, createApplicationType } from "../types/AppType"
 import "../css/Home.css"
 import { useEffect, useState } from "react"
-import { getApplications } from "../services/applicationService"
+import { createApplication, getApplications } from "../services/applicationService"
 
 function Home () {
 
     const [appliedApp, setAppliedApp] = useState<AppItem[]>([])
     console.log(appliedApp);
+
+    const [editingApp, setEditingApp] = useState<AppItem | null>(null)
+    console.log(editingApp);
+
+    
 
     useEffect(() => {
         const loadApplications = async () => {
@@ -23,15 +28,9 @@ function Home () {
         loadApplications();
     }, [])
     
-    const [editingApp, setEditingApp] = useState<AppItem | null>(null)
-    console.log(editingApp);
-    
-    useEffect(() => {
-            localStorage.setItem("applied", JSON.stringify(appliedApp))
-        }, [appliedApp])
-
-    const handleAdd = (newApp: AppItem) => {
-        setAppliedApp(prev => [...prev, newApp])
+    const handleAdd = async (newApp: createApplicationType) => {
+        await createApplication(newApp)
+        await getApplications()
     }
 
     const handleDelete = (id: number) => {

@@ -1,3 +1,5 @@
+import type { AppItem, createApplicationType } from "../types/AppType";
+
 const API_URL = "http://localhost:8080/api/applications";
 
 export const getApplications = async () => {
@@ -8,4 +10,16 @@ export const getApplications = async () => {
     }
 
     return response.json();
+}
+
+export const createApplication = async (application: createApplicationType) => {
+    const response = await fetch(API_URL, {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(application)
+    })
+
+    return response.json()
 }
