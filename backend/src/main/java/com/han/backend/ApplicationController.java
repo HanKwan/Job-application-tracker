@@ -1,8 +1,6 @@
 package com.han.backend;
 
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -19,5 +17,10 @@ public class ApplicationController {
     @GetMapping
     public List<Application> findAll() {
         return applicationRepository.findAll();
+    }
+
+    @PostMapping
+    public Application save(@RequestBody Application application) {
+        return applicationRepository.save(application);
     }
 }
