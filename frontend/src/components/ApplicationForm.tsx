@@ -19,14 +19,16 @@ const ApplicationForm = (props: Props) => {
     const [newCompany, setNewCompany] = useState("")
     const [position, setPosition] = useState("")
     const [status, setStatus] = useState("applied")
-    const [date, setDate] = useState(today)
+    const [applicationDate, setApplicationDate] = useState(today)
+    const [note, setNote] = useState("")
 
     useEffect(() => {
             if (editingApp) {
-                setNewCompany(editingApp.company)
+                setNewCompany(editingApp.companyName)
                 setPosition(editingApp.position)
                 setStatus(editingApp.status)
-                setDate(editingApp.date)
+                setApplicationDate(editingApp.applicationDate)
+                setNote(editingApp.note)
             }
         }, [editingApp])
 
@@ -37,18 +39,20 @@ const ApplicationForm = (props: Props) => {
 
         const newApp: AppItem = {
             id: Date.now(),
-            company: newCompany,
+            companyName: newCompany,
             position,
             status,
-            date: date
+            note,
+            applicationDate,
         }
 
         if (editingApp) {
             onUpdate(editingApp.id, {
-                company: newCompany,
+                companyName: newCompany,
                 position,
                 status,
-                date
+                note,
+                applicationDate,
             })
         } else {
             onAdd(newApp)
@@ -57,7 +61,7 @@ const ApplicationForm = (props: Props) => {
         setNewCompany("")
         setPosition("")
         setStatus("applied")
-        setDate(today)
+        setApplicationDate(today)
     }
 
     return (
@@ -81,9 +85,15 @@ const ApplicationForm = (props: Props) => {
                 <option value="reject">Reject</option>
             </select>
 
+            <textarea
+                value={note}
+                onChange={(e) => setNote(e.target.value)}
+                placeholder="Notes..."
+            />
+
             <input type="date" 
-                    value={date}
-                    onChange={(e) => setDate(e.target.value)}/>
+                    value={applicationDate}
+                    onChange={(e) => setApplicationDate(e.target.value)}/>
 
             <button type="submit">{editingApp ? "Edit" : "Add"}</button>
         </form>

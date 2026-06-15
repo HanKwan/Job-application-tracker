@@ -14,7 +14,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
 
     return (
         <div className="app-item">
-            <span className="company">{app.company}</span>
+            <span className="company">{app.companyName}</span>
             <span className="position">{app.position}</span>
             
             <select className={`status-${app.status}`} 
@@ -29,7 +29,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
                 ))}
             </select>
             
-            <span className="date">{app.date}</span>
+            <span className="date">{app.applicationDate}</span>
 
             <div className="actions">
                 <button className="edit-btn" onClick={() => onEditClick(app)}>Edit</button>
