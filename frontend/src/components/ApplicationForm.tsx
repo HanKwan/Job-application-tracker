@@ -84,10 +84,13 @@ const ApplicationForm = (props: Props) => {
                     placeholder="Enter position..."/>
             
             <select value={status} onChange={(e) => setStatus(e.target.value)}>
-                <option value="applied">Applied</option>
-                <option value="interview">Interview</option>
-                <option value="offer">Offer</option>
-                <option value="reject">Reject</option>
+                <option value="Applied">Applied</option>
+                <option value="Interview-1">Interview-1</option>
+                <option value="Interview-2">Interview-2</option>
+                <option value="Interview-3">Interview-3</option>
+                <option value="Final-interview">Final-interview</option>
+                <option value="Offered">Offered</option>
+                <option value="Rejected">Rejected</option>
             </select>
 
             <input type="date" 
