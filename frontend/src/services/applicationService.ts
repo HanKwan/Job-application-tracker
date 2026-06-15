@@ -6,4 +6,6 @@ export const getApplications = async () => {
     if (!response.ok) {
         throw new Error("Failed to fetch applications")
     }
+
+    return response.json();
 }
