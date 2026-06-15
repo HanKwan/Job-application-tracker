@@ -20,17 +20,32 @@ public class ApplicationController {
     }
 
     @PostMapping
-    public Application save(@RequestBody Application application) {
+    public Application addNewApplication(@RequestBody Application application) {
         return applicationRepository.save(application);
     }
 
     @GetMapping("/search/{id}")
-    public Application findById(@PathVariable Long id) {
+    public Application findCompanyById(@PathVariable Long id) {
         return applicationRepository.findById(id).orElse(null);
     }
 
     @GetMapping("/search")
     public List<Application> findByCompanyName(@RequestParam String companyName) {
         return applicationRepository.findAllByCompanyNameContainingIgnoreCase(companyName);
+    }
+
+    @PutMapping("/{id}")
+    public Application updateApplication(
+            @PathVariable Long id,
+            @RequestBody Application updateApplication) {
+
+        Application existing = applicationRepository.findById(id).orElseThrow(null);
+
+        existing.setCompanyName(updateApplication.getCompanyName());
+        existing.setPosition(updateApplication.getPosition());
+        existing.setStatus(updateApplication.getStatus());
+        existing.setNote(updateApplication.getNote());
+
+        return applicationRepository.save(existing);
     }
 }
