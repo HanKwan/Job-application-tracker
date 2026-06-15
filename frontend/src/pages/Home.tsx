@@ -39,6 +39,16 @@ function Home () {
             app.id === id ? {...app, ...editedApplication} : app))
     }
 
+    // for scrolling back to top + setEditingApp
+    const handleEditClick = (app: AppItem) => {
+        setEditingApp(app)
+
+        window.scrollTo({
+            top: 0,
+            behavior: "smooth"
+        })
+    }
+
     return (
         <div className="container">
             <ApplicationForm onAdd={handleAdd}
@@ -48,7 +58,7 @@ function Home () {
             <ApplicationList applications={appliedApp} 
                              onUpdate={handleUpdate} 
                              onDelete={handleDelete}
-                             onEditClick={setEditingApp}/>
+                             onEditClick={handleEditClick}/>
         </div>
     )
 }
