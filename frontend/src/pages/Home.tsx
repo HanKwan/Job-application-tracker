@@ -13,24 +13,24 @@ function Home () {
     const [editingApp, setEditingApp] = useState<AppItem | null>(null)
     console.log(editingApp);
 
-    
+    // const [refreshKey, setRefreshKey] = useState(0)     // for reloading the page per adding application
+
+    const loadApplications = async () => {
+        try {
+            const data = await getApplications();
+            setAppliedApp(data);
+        } catch (err) {
+            console.error(err);
+        }
+    };
 
     useEffect(() => {
-        const loadApplications = async () => {
-            try {
-                const data = await getApplications();
-                setAppliedApp(data);
-            } catch (err) {
-                console.error(err)
-            }
-        }
-
         loadApplications();
     }, [])
     
     const handleAdd = async (newApp: createApplicationType) => {
         await createApplication(newApp)
-        await getApplications()
+        await loadApplications()
     }
 
     const handleDelete = (id: number) => {
