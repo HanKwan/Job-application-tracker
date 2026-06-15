@@ -53,7 +53,8 @@ function Home () {
         <div className="container">
             <ApplicationForm onAdd={handleAdd}
                              onUpdate={handleUpdate}
-                             onEditClick={editingApp}/> 
+                             onEditClick={editingApp}
+                             onClearEdit={() => setEditingApp(null)}/> 
 
             <ApplicationList applications={appliedApp} 
                              onUpdate={handleUpdate} 

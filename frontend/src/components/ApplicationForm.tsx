@@ -6,6 +6,7 @@ type Props = {
     onAdd: (app: AppItem) => void
     onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
     onEditClick?: AppItem | null
+    onClearEdit: () => void
 }
 
 const ApplicationForm = (props: Props) => {
@@ -13,6 +14,8 @@ const ApplicationForm = (props: Props) => {
     const editingApp = props.onEditClick
     const onUpdate = props.onUpdate
     console.log(editingApp)
+
+    const clearEditForm = props.onClearEdit
 
     const today = new Date().toLocaleDateString("sv-SE")
 
@@ -62,6 +65,8 @@ const ApplicationForm = (props: Props) => {
         setPosition("")
         setStatus("applied")
         setApplicationDate(today)
+        setNote("")
+        clearEditForm()
     }
 
     return (
