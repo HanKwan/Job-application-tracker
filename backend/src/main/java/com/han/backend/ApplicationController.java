@@ -28,4 +28,9 @@ public class ApplicationController {
     public Application findById(@PathVariable Long id) {
         return applicationRepository.findById(id).orElse(null);
     }
+
+    @GetMapping("/search")
+    public List<Application> findByCompanyName(@RequestParam String companyName) {
+        return applicationRepository.findAllByCompanyNameContainingIgnoreCase(companyName);
+    }
 }
