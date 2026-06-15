@@ -10,7 +10,14 @@ interface ApplicationProps {
 
 const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationProps) => {
 
-    const statuses = ["applied", "interview", "offer", "reject"]
+    const statuses = ["Applied",
+                        "Screening",
+                        "Interview-1", 
+                        "Interview-2", 
+                        "Interview-3", 
+                        "Final-interview", 
+                        "Offered", 
+                        "Rejected"]
 
     return (
         <div className="app-item">

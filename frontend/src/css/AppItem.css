@@ -75,10 +75,14 @@
 }
 
 /* Status colors */
-.status-applied { color: #9ca3af; }
-.status-interview { color: #f59e0b; }
-.status-offer { color: #22c55e; }
-.status-reject { color: #ef4444; }
+.status-Applied { color: #60A5FA; }
+.status-Screening{ color: #A78BFA;}
+.status-Interview-1 { color: #FBBF24; }
+.status-Interview-2 { color: #FB923C; }
+.status-Interview-3 { color: #F97316; }
+.status-Final-interview { color: #d86060; }
+.status-Offered { color: #22c55e; }
+.status-Rejected { color: #6B7280; }
 
 /* Mobile */
 @media (max-width: 755px) {
