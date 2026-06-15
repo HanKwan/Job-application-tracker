@@ -1,5 +1,6 @@
 package com.han.backend;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -47,5 +48,11 @@ public class ApplicationController {
         existing.setNote(updateApplication.getNote());
 
         return applicationRepository.save(existing);
+    }
+
+    @DeleteMapping("/{id}")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void deleteApplication(@PathVariable Long id) {
+        applicationRepository.deleteById(id);
     }
 }
