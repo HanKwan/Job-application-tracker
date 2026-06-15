@@ -3,7 +3,7 @@ import ApplicationList from "../components/ApplicationList"
 import type { AppItem, createApplicationType } from "../types/AppType"
 import "../css/Home.css"
 import { useEffect, useState } from "react"
-import { createApplication, getApplications } from "../services/applicationService"
+import { createApplication, deleteApplication, getApplications } from "../services/applicationService"
 
 function Home () {
 
@@ -12,8 +12,6 @@ function Home () {
 
     const [editingApp, setEditingApp] = useState<AppItem | null>(null)
     console.log(editingApp);
-
-    // const [refreshKey, setRefreshKey] = useState(0)     // for reloading the page per adding application
 
     const loadApplications = async () => {
         try {
@@ -33,8 +31,9 @@ function Home () {
         await loadApplications()
     }
 
-    const handleDelete = (id: number) => {
-        setAppliedApp(prev => prev.filter(a => a.id !== id))
+    const handleDelete = async (id: number) => {
+        await deleteApplication(id)
+        await loadApplications()
     }
 
     const handleUpdate = (id: number, editedApplication: Partial<AppItem>) => {
