@@ -4,7 +4,7 @@ import "../css/AppForm.css"
 
 type Props = {
     onAdd: (app: createApplicationType) => void
-    onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
+    onUpdate: (id: number, updatedApp: createApplicationType) => void
     onEditClick?: AppItem | null
     onClearEdit: () => void
 }

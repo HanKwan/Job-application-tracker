@@ -1,4 +1,4 @@
-import type { AppItem, createApplicationType } from "../types/AppType";
+import type { createApplicationType } from "../types/AppType";
 
 const API_URL = "http://localhost:8080/api/applications";
 
@@ -32,4 +32,17 @@ export const deleteApplication = async (applicationId: number) => {
     if (!response.ok) {
         throw new Error("Failed to delete application")
     }
+}
+
+export const updateApplication = async (applicationId: number, application: createApplicationType) => {
+    
+    const response = await fetch(API_URL + "/" + applicationId, {
+        method: "PUT",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify(application)
+    })
+
+    return response.json()
 }

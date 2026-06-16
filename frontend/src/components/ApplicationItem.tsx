@@ -1,9 +1,9 @@
 import "../css/AppItem.css"
-import type { AppItem } from "../types/AppType"
+import type { AppItem, createApplicationType } from "../types/AppType"
 
 interface ApplicationProps {
     app: AppItem
-    onUpdate: (id: number, updatedApp: Partial<AppItem>) => void
+    onUpdate: (id: number, updatedApp: createApplicationType) => void
     onDelete: (id: number) => void
     onEditClick: (app: AppItem) => void
 }
@@ -33,7 +33,13 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
             
                 <select className={`status-${app.status}`} 
                         value={app.status} 
-                        onChange={(e) => onUpdate(app.id, {status: e.target.value})}>
+                        onChange={(e) => onUpdate(app.id, {
+                            companyName: app.companyName,
+                            position: app.position,
+                            status: e.target.value,
+                            note: app.note,
+                            applicationDate: app.applicationDate
+                        })}>
 
                     {statuses.map(s => (
                         <option key={s} 

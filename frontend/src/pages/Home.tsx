@@ -3,7 +3,7 @@ import ApplicationList from "../components/ApplicationList"
 import type { AppItem, createApplicationType } from "../types/AppType"
 import "../css/Home.css"
 import { useEffect, useState } from "react"
-import { createApplication, deleteApplication, getApplications } from "../services/applicationService"
+import { createApplication, deleteApplication, getApplications, updateApplication } from "../services/applicationService"
 
 function Home () {
 
@@ -36,9 +36,9 @@ function Home () {
         await loadApplications()
     }
 
-    const handleUpdate = (id: number, editedApplication: Partial<AppItem>) => {
-        setAppliedApp(prev => prev.map(app => 
-            app.id === id ? {...app, ...editedApplication} : app))
+    const handleUpdate = async (id: number, editedApplication: createApplicationType) => {
+        await updateApplication(id, editedApplication)
+        await loadApplications()
     }
 
     // for scrolling back to top + setEditingApp
