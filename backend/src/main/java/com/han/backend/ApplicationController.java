@@ -23,6 +23,7 @@ public class ApplicationController {
 
     @PostMapping
     public Application addNewApplication(@RequestBody Application application) {
+        System.out.println(application.getApplicationDate());
         return applicationRepository.save(application);
     }
 
@@ -47,6 +48,7 @@ public class ApplicationController {
         existing.setPosition(updateApplication.getPosition());
         existing.setStatus(updateApplication.getStatus());
         existing.setNote(updateApplication.getNote());
+        existing.setApplicationDate(updateApplication.getApplicationDate());
 
         return applicationRepository.save(existing);
     }

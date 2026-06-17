@@ -1,9 +1,8 @@
 package com.han.backend;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.Id;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
+
+import java.time.LocalDate;
 
 @Entity
 @Table(name = "applications")
@@ -16,16 +15,19 @@ public class Application {
     private String position;
     private String status;
     private String note;
+    @Column(name = "application_date")
+    private LocalDate applicationDate;
 
     public Application() {
     }
 
-    public Application(Long id, String companyName, String position, String status, String note) {
+    public Application(Long id, String companyName, String position, String status, String note, LocalDate applicationDate) {
         this.id = id;
         this.companyName = companyName;
         this.position = position;
         this.status = status;
         this.note = note;
+        this.applicationDate = applicationDate;
     }
 
     public Long getId() {
@@ -48,6 +50,10 @@ public class Application {
         return note;
     }
 
+    public LocalDate getApplicationDate() {
+        return applicationDate;
+    }
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
@@ -62,5 +68,9 @@ public class Application {
 
     public void setNote(String note) {
         this.note = note;
+    }
+
+    public void setApplicationDate(LocalDate applicationDate) {
+        this.applicationDate = applicationDate;
     }
 }

@@ -17,11 +17,11 @@ const ApplicationForm = (props: Props) => {
 
     const clearEditForm = props.onClearEdit
 
-    const today = new Date().toLocaleDateString("sv-SE")
+    const today = () => new Date().toISOString().split("T")[0]
 
     const [newCompany, setNewCompany] = useState("")
     const [position, setPosition] = useState("")
-    const [status, setStatus] = useState("applied")
+    const [status, setStatus] = useState("Applied")
     const [applicationDate, setApplicationDate] = useState(today)
     const [note, setNote] = useState("")
 
@@ -30,7 +30,7 @@ const ApplicationForm = (props: Props) => {
                 setNewCompany(editingApp.companyName)
                 setPosition(editingApp.position)
                 setStatus(editingApp.status)
-                setApplicationDate(editingApp.applicationDate)
+                setApplicationDate(editingApp.applicationDate?.slice(0, 10) || today)
                 setNote(editingApp.note)
             }
         }, [editingApp])
