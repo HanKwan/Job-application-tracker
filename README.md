@@ -19,7 +19,7 @@ A full-stack web application for tracking job applications and their statuses.
 
 ### Frontend
 - React  
-- JavaScript  
+- TypeScript 
 - CSS  
 
 ### Backend
