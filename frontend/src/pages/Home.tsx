@@ -65,17 +65,17 @@ function Home () {
     
     return (
         <div className="container">
-            <SearchBar 
-                searchText={searchText} 
-                setSearchText={setSearchText}
-            />
-
             <ApplicationForm 
                 onAdd={handleAdd}
                 onUpdate={handleUpdate}
                 onEditClick={editingApp}
                 onClearEdit={() => setEditingApp(null)}
             /> 
+
+            <SearchBar 
+                searchText={searchText} 
+                setSearchText={setSearchText}
+            />
 
             <ApplicationList 
                 applications={filteredApps} 

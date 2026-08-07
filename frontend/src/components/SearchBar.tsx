@@ -1,3 +1,5 @@
+import "../css/SearchBar.css"
+
 interface Props {
     searchText: string;
     setSearchText: (text: string) => void;
@@ -6,6 +8,7 @@ interface Props {
 const SearchBar = ({ searchText, setSearchText }: Props) => {
     return (
         <input 
+            className="search-bar"
             type="text" 
             value={searchText}
             onChange={(e) => setSearchText(e.target.value)}
