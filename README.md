@@ -61,3 +61,18 @@ A full-stack web application for tracking job applications and their statuses.
 ### Database Setup
 ```sql
 CREATE DATABASE job_tracker;
+```
+### Backend Setup
+```sql
+cd backend
+./mvnw spring-boot:run
+```
+
+### Frontend Setup
+```sql
+cd frontend
+npm install
+npm run dev
+```
+
+### Demo Video: https://youtu.be/jhobCZUL3f0
