@@ -22,7 +22,7 @@ const ApplicationForm = (props: Props) => {
     const [companyName, setCompanyName] = useState("")
     const [position, setPosition] = useState("")
     const [status, setStatus] = useState("Applied")
-    const [applicationDate, setApplicationDate] = useState(today)
+    const [applicationDate, setApplicationDate] = useState(today())
     const [note, setNote] = useState("")
 
     useEffect(() => {
@@ -30,7 +30,7 @@ const ApplicationForm = (props: Props) => {
                 setCompanyName(editingApp.companyName)
                 setPosition(editingApp.position)
                 setStatus(editingApp.status)
-                setApplicationDate(editingApp.applicationDate?.slice(0, 10) || today)
+                setApplicationDate(editingApp.applicationDate?.slice(0, 10) || today())
                 setNote(editingApp.note)
             }
         }, [editingApp])
@@ -63,8 +63,8 @@ const ApplicationForm = (props: Props) => {
 
         setCompanyName("")
         setPosition("")
-        setStatus("applied")
-        setApplicationDate(today)
+        setStatus("Applied")
+        setApplicationDate(today())
         setNote("")
         clearEditForm()
     }
