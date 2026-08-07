@@ -13,6 +13,8 @@ function Home () {
     const [editingApp, setEditingApp] = useState<AppItem | null>(null)
     console.log(editingApp);
 
+    const [searchText, setSearchText] = useState("")
+
     const loadApplications = async () => {
         try {
             const data = await getApplications();
@@ -51,6 +53,10 @@ function Home () {
         })
     }
 
+    const filteredApps = appliedApp.filter((app) => {
+        app.companyName.toLowerCase().includes(searchText.toLowerCase())
+    })
+
     return (
         <div className="container">
             <ApplicationForm onAdd={handleAdd}
@@ -58,7 +64,7 @@ function Home () {
                              onEditClick={editingApp}
                              onClearEdit={() => setEditingApp(null)}/> 
 
-            <ApplicationList applications={appliedApp} 
+            <ApplicationList applications={filteredApps} 
                              onUpdate={handleUpdate} 
                              onDelete={handleDelete}
                              onEditClick={handleEditClick}/>
