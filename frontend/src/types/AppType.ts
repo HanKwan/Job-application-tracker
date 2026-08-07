@@ -7,7 +7,7 @@ export interface AppItem {
     note: string;
 }
 
-export interface createApplicationType {
+export interface CreateApplicationType {
     companyName: string;
     position: string;
     status: string;

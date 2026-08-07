@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import type { AppItem, createApplicationType } from "../types/AppType"
+import type { AppItem, CreateApplicationType } from "../types/AppType"
 import "../css/AppForm.css"
 
 type Props = {
-    onAdd: (app: createApplicationType) => void
-    onUpdate: (id: number, updatedApp: createApplicationType) => void
+    onAdd: (app: CreateApplicationType) => void
+    onUpdate: (id: number, updatedApp: CreateApplicationType) => void
     onEditClick?: AppItem | null
     onClearEdit: () => void
 }
@@ -40,7 +40,7 @@ const ApplicationForm = (props: Props) => {
 
         if (!newCompany || !status) return
 
-        const newApp: createApplicationType = {
+        const newApp: CreateApplicationType = {
             // id: Date.now(),  // spring will generate the id
             companyName: newCompany,
             position,

@@ -1,6 +1,6 @@
 import ApplicationForm from "../components/ApplicationForm"
 import ApplicationList from "../components/ApplicationList"
-import type { AppItem, createApplicationType } from "../types/AppType"
+import type { AppItem, CreateApplicationType } from "../types/AppType"
 import "../css/Home.css"
 import { useEffect, useState } from "react"
 import { createApplication, deleteApplication, getApplications, updateApplication } from "../services/applicationService"
@@ -26,7 +26,7 @@ function Home () {
         loadApplications();
     }, [])
     
-    const handleAdd = async (newApp: createApplicationType) => {
+    const handleAdd = async (newApp: CreateApplicationType) => {
         await createApplication(newApp)
         await loadApplications()
     }
@@ -36,7 +36,7 @@ function Home () {
         await loadApplications()
     }
 
-    const handleUpdate = async (id: number, editedApplication: createApplicationType) => {
+    const handleUpdate = async (id: number, editedApplication: CreateApplicationType) => {
         await updateApplication(id, editedApplication)
         await loadApplications()
     }

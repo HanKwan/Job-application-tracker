@@ -4,7 +4,16 @@ import Home from './pages/Home'
 function App() {
 
   return (
-      <Home />
+      <div>
+        <h1 style={{
+          marginBottom: "24px",
+          padding: "8px 0",
+          textAlign: "center",
+        }}>
+          Job Application tracker</h1>
+
+        <Home />
+      </div>
   )
 }
 

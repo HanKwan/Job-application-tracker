@@ -1,10 +1,10 @@
 import ApplicationItem from "./ApplicationItem"
-import type { AppItem, createApplicationType } from "../types/AppType"
+import type { AppItem, CreateApplicationType } from "../types/AppType"
 import "../css/AppList.css"
 
 interface ApplicationProps {
     applications: AppItem[]
-    onUpdate: (id: number, updatedApp: createApplicationType) => void
+    onUpdate: (id: number, updatedApp: CreateApplicationType) => void
     onDelete: (id: number) => void
     onEditClick: (app: AppItem) => void 
 }

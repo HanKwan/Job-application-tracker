@@ -1,4 +1,4 @@
-import type { createApplicationType } from "../types/AppType";
+import type { CreateApplicationType } from "../types/AppType";
 
 const API_URL = "http://localhost:8080/api/applications";
 
@@ -12,7 +12,7 @@ export const getApplications = async () => {
     return response.json();
 }
 
-export const createApplication = async (application: createApplicationType) => {
+export const createApplication = async (application: CreateApplicationType) => {
     const response = await fetch(API_URL, {
         method: "POST",
         headers: {
@@ -34,7 +34,7 @@ export const deleteApplication = async (applicationId: number) => {
     }
 }
 
-export const updateApplication = async (applicationId: number, application: createApplicationType) => {
+export const updateApplication = async (applicationId: number, application: CreateApplicationType) => {
     
     const response = await fetch(API_URL + "/" + applicationId, {
         method: "PUT",
