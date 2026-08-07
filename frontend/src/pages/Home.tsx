@@ -4,6 +4,7 @@ import type { AppItem, CreateApplicationType } from "../types/AppType"
 import "../css/Home.css"
 import { useEffect, useState } from "react"
 import { createApplication, deleteApplication, getApplications, updateApplication } from "../services/applicationService"
+import SearchBar from "../components/SearchBar"
 
 function Home () {
 
@@ -18,6 +19,9 @@ function Home () {
     const loadApplications = async () => {
         try {
             const data = await getApplications();
+
+            console.log("backend date:", data);
+            
             setAppliedApp(data);
         } catch (err) {
             console.error(err);
@@ -54,20 +58,31 @@ function Home () {
     }
 
     const filteredApps = appliedApp.filter((app) => {
-        app.companyName.toLowerCase().includes(searchText.toLowerCase())
+        return app.companyName.toLowerCase().includes(searchText.toLowerCase())
     })
 
+    console.log(filteredApps);
+    
     return (
         <div className="container">
-            <ApplicationForm onAdd={handleAdd}
-                             onUpdate={handleUpdate}
-                             onEditClick={editingApp}
-                             onClearEdit={() => setEditingApp(null)}/> 
+            <SearchBar 
+                searchText={searchText} 
+                setSearchText={setSearchText}
+            />
 
-            <ApplicationList applications={filteredApps} 
-                             onUpdate={handleUpdate} 
-                             onDelete={handleDelete}
-                             onEditClick={handleEditClick}/>
+            <ApplicationForm 
+                onAdd={handleAdd}
+                onUpdate={handleUpdate}
+                onEditClick={editingApp}
+                onClearEdit={() => setEditingApp(null)}
+            /> 
+
+            <ApplicationList 
+                applications={filteredApps} 
+                onUpdate={handleUpdate} 
+                onDelete={handleDelete}
+                onEditClick={handleEditClick}
+            />
         </div>
     )
 }
