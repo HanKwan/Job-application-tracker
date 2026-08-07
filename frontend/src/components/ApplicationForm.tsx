@@ -19,7 +19,7 @@ const ApplicationForm = (props: Props) => {
 
     const today = () => new Date().toISOString().split("T")[0]
 
-    const [newCompany, setNewCompany] = useState("")
+    const [companyName, setCompanyName] = useState("")
     const [position, setPosition] = useState("")
     const [status, setStatus] = useState("Applied")
     const [applicationDate, setApplicationDate] = useState(today)
@@ -27,7 +27,7 @@ const ApplicationForm = (props: Props) => {
 
     useEffect(() => {
             if (editingApp) {
-                setNewCompany(editingApp.companyName)
+                setCompanyName(editingApp.companyName)
                 setPosition(editingApp.position)
                 setStatus(editingApp.status)
                 setApplicationDate(editingApp.applicationDate?.slice(0, 10) || today)
@@ -38,11 +38,11 @@ const ApplicationForm = (props: Props) => {
     const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
 
-        if (!newCompany || !status) return
+        if (!companyName || !status) return
 
         const newApp: CreateApplicationType = {
             // id: Date.now(),  // spring will generate the id
-            companyName: newCompany,
+            companyName,
             position,
             status,
             note,
@@ -51,7 +51,7 @@ const ApplicationForm = (props: Props) => {
 
         if (editingApp) {
             onUpdate(editingApp.id, {
-                companyName: newCompany,
+                companyName: companyName,
                 position,
                 status,
                 note,
@@ -61,7 +61,7 @@ const ApplicationForm = (props: Props) => {
             onAdd(newApp)
         }
 
-        setNewCompany("")
+        setCompanyName("")
         setPosition("")
         setStatus("applied")
         setApplicationDate(today)
@@ -72,9 +72,9 @@ const ApplicationForm = (props: Props) => {
     return (
         <form className="app-form" onSubmit={handleAdd}>
             <input type="text"
-                    value={newCompany}
+                    value={companyName}
                     className="company-name"
-                    onChange={(e) => setNewCompany(e.target.value)}
+                    onChange={(e) => setCompanyName(e.target.value)}
                     placeholder="Enter company's name..."/>
 
             <input type="text" 
