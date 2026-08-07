@@ -51,7 +51,7 @@ const ApplicationForm = (props: Props) => {
 
         if (editingApp) {
             onUpdate(editingApp.id, {
-                companyName: companyName,
+                companyName,
                 position,
                 status,
                 note,
