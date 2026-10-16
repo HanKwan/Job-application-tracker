@@ -2,18 +2,18 @@ import './css/App.css'
 import Home from './pages/Home'
 
 function App() {
-
   return (
-      <div>
-        <h1 style={{
-          marginBottom: "24px",
-          padding: "8px 0",
-          textAlign: "center",
-        }}>
-          Job Application tracker</h1>
+    <main className="app-shell">
+      <header className="app-header">
+        <p className="app-eyebrow">YOUR PERSONAL WORKSPACE</p>
+        <h1 className="app-title">Job Application Tracker</h1>
+        <p className="app-subtitle">
+          Keep track of your journey, one step at a time.
+        </p>
+      </header>
 
-        <Home />
-      </div>
+      <Home />
+    </main>
   )
 }
 
