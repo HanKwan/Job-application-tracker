@@ -19,6 +19,16 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
                         "Offered", 
                         "Rejected"]
 
+    const handleStatusChange = (newStatus: string) => {
+        onUpdate(app.id, {
+            companyName: app.companyName,
+            position: app.position,
+            status: newStatus,
+            note: app.note,
+            applicationDate: app.applicationDate
+        })
+    }
+
     return (
         <div className="app-item">
             <p><strong>Company's name:</strong> {app.companyName}</p>
@@ -33,13 +43,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
             
                 <select className={`status-${app.status}`} 
                         value={app.status} 
-                        onChange={(e) => onUpdate(app.id, {
-                            companyName: app.companyName,
-                            position: app.position,
-                            status: e.target.value,
-                            note: app.note,
-                            applicationDate: app.applicationDate
-                        })}>
+                        onChange={(e) => handleStatusChange(e.target.value)}>
 
                     {statuses.map(s => (
                         <option key={s} 
