@@ -11,8 +11,13 @@ import org.springframework.web.bind.annotation.RestController;
 @RequestMapping("/api/auth")
 public class AuthController {
 
+
+
     @PostMapping("/register")
     public String register(@RequestBody RegisterRequest request) {
+        String email = request.getEmail();
+        String password = request.getPassword();
+
         return "Registration endpoint reached";
     }
 
