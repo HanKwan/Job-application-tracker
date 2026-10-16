@@ -1,4 +1,4 @@
-package com.han.backend;
+package com.han.backend.entity;
 
 import jakarta.persistence.*;
 

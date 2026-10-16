@@ -1,5 +1,6 @@
-package com.han.backend;
+package com.han.backend.repository;
 
+import com.han.backend.entity.Application;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;

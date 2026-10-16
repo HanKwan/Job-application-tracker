@@ -1,5 +1,7 @@
-package com.han.backend;
+package com.han.backend.controller;
 
+import com.han.backend.repository.ApplicationRepository;
+import com.han.backend.entity.Application;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
 
