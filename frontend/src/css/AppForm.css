@@ -1,86 +1,102 @@
+
 .app-form {
     display: grid;
     grid-template-columns: 1.5fr 1.5fr 1fr 1fr;
-    gap: 12px;
+    gap: 14px;
 
     width: 100%;
-    max-width: 900px;
-    margin: 0 auto 20px auto;
+    max-width: 800px;
+    margin: 0 auto 28px;
+    padding: 24px;
 
-    background: #f9f9f9;
-    border-radius: 10px;
-    padding: 15px;
+    background: #ffffff;
+    border: 1px solid #e4e9df;
+    border-radius: 16px;
+    box-shadow: 0 4px 16px rgba(52, 70, 56, 0.04);
+
     box-sizing: border-box;
 }
 
-/* Inputs */
+/* Inputs, select, textarea, and button */
 .app-form input,
 .app-form select,
 .app-form textarea,
 .app-form button {
     width: 100%;
+    font: inherit;
     font-size: 14px;
-    border-radius: 6px;
+    border-radius: 9px;
     box-sizing: border-box;
 }
 
-/* Input height */
+/* Inputs and select */
 .app-form input,
 .app-form select {
-    height: 38px;
-    padding: 0 10px;
+    height: 42px;
+    padding: 0 12px;
 }
 
-/* Textarea */
+.app-form input,
+.app-form select,
 .app-form textarea {
-    min-height: 90px;
-    padding: 10px;
+    color: #344638;
+    background: #fbfcf8;
+    border: 1px solid #dce3d6;
+    outline: none;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+
+/* Placeholder text */
+.app-form input::placeholder,
+.app-form textarea::placeholder {
+    color: #9aa596;
+}
+
+/* Focus: only applies while using a field */
+.app-form input:focus,
+.app-form select:focus,
+.app-form textarea:focus {
+    border-color: #8fa68a;
+    box-shadow: 0 0 0 3px rgba(143, 166, 138, 0.16);
+}
+
+/* Notes field */
+.app-form textarea {
+    min-height: 100px;
+    padding: 12px;
     resize: vertical;
     grid-column: 1 / -1;
 }
 
-/* Inputs + Select + Textarea */
-.app-form input,
-.app-form select,
-.app-form textarea {
-    border: 1px solid #ccc;
-    background: white;
-}
-
-/* Focus */
-.app-form input,
-.app-form select,
-.app-form textarea {
-    outline: none;
-    border-color: #4f46e5;
-}
-
-/* Button */
+/* Submit button */
 .app-form button {
-    height: 38px;
-    border: none;
-    background: #4f46e5;
-    color: white;
+    min-height: 42px;
+    padding: 10px 16px;
+    border: 1px solid #718b6c;
+    background: #718b6c;
+    color: #ffffff;
+    font-weight: 600;
     cursor: pointer;
-    transition: 0.2s;
+    transition: background 0.2s, transform 0.2s;
 }
 
-.app-form button {
-    background: #4338ca;
+.app-form button:hover {
+    background: #5d7658;
+}
+
+.app-form button:active {
+    transform: translateY(1px);
 }
 
 /* Mobile */
 @media (max-width: 755px) {
     .app-form {
         grid-template-columns: 1fr;
-        padding: 12px;
+        gap: 12px;
+        padding: 16px;
     }
 
     .app-form textarea {
         grid-column: auto;
-    }
-
-    .app-form button {
-        width: 100%;
     }
 }
