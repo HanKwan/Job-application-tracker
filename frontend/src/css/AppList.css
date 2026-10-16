@@ -1,24 +1,21 @@
+
 .app-list {
-  width: 100%;
-  max-width: 800px;
-  margin: 0 auto;
-  font-family: sans-serif;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 260px), 1fr));
+    align-items: stretch;
+    gap: 18px;
+
+    width: 100%;
+    max-width: 800px;
+    margin: 0 auto;
+
+    min-width: 0;
 }
 
-.app-list-header {
-  display: flex;
-  justify-content: space-between;
-  padding: 8px 12px;
-  border-bottom: 1px solid #ddd;
-  align-items: center;
+/* Single column on narrow screens */
+@media (max-width: 560px) {
+    .app-list {
+        grid-template-columns: minmax(0, 1fr);
+        gap: 14px;
+    }
 }
-
-.app-list-header {
-  font-weight: bold;
-  background-color: #f0f0f0;
-}
-
-.app-list-header span {
-    padding-right: 50px;
-}
-
