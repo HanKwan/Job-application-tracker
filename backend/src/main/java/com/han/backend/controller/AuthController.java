@@ -2,6 +2,7 @@ package com.han.backend.controller;
 
 
 import com.han.backend.dto.RegisterRequest;
+import com.han.backend.entity.User;
 import com.han.backend.repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -31,6 +32,8 @@ public class AuthController {
         }
 
         String hashedPassword = passwordEncoder.encode(password);
+        User user = new User(email, hashedPassword);
+
         System.out.println(hashedPassword);
 
         return "Email is available.";
