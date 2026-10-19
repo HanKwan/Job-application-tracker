@@ -30,6 +30,9 @@ public class AuthController {
             return "This email is already registered.";
         }
 
+        String hashedPassword = passwordEncoder.encode(password);
+        System.out.println(hashedPassword);
+
         return "Email is available.";
     }
 
