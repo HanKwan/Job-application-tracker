@@ -34,9 +34,9 @@ public class AuthController {
         String hashedPassword = passwordEncoder.encode(password);
         User user = new User(email, hashedPassword);
 
-        System.out.println(hashedPassword);
+        userRepository.save(user);
 
-        return "Email is available.";
+        return "Registration successful.";
     }
 
 }
