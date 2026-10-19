@@ -41,7 +41,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
             <div className="status-container">
                 <strong>Status:</strong>
             
-                <select className={`status-${app.status}`} 
+                <select className={`status-select status-${app.status}`} 
                         value={app.status} 
                         onChange={(e) => handleStatusChange(e.target.value)}>
 
@@ -58,7 +58,7 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
                 <p className="note">{app.note}</p>
             )}
 
-            <div className="actions">
+            <div className="app-actions">
                 <button className="edit-btn" onClick={() => onEditClick(app)}>Edit</button>
                 <button className="delete-btn" onClick={() => onDelete(app.id)}>Delete</button>
             </div>
