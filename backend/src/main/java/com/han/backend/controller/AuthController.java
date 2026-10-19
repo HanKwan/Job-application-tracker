@@ -26,7 +26,11 @@ public class AuthController {
         String email = request.getEmail();
         String password = request.getPassword();
 
-        return "Registration endpoint reached";
+        if (userRepository.findByEmail(email).isPresent()) {
+            return "This email is already registered.";
+        }
+
+        return "Email is available.";
     }
 
 }
