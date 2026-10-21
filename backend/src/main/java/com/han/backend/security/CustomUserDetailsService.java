@@ -11,11 +11,11 @@ import org.springframework.stereotype.Service;
 // the existing User entity and UserRepository to Spring Security
 
 @Service
-public class CustomDetailsService implements UserDetailsService {
+public class CustomUserDetailsService implements UserDetailsService {
 
     private final UserRepository userRepository;
 
-    public CustomDetailsService(UserRepository userRepository) {
+    public CustomUserDetailsService(UserRepository userRepository) {
         this.userRepository = userRepository;
     }
 
