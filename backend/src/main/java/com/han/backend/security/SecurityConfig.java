@@ -19,12 +19,15 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(
             HttpSecurity http,
-            DaoAuthenticationProvider authenticationProvider) throws Exception {
+            DaoAuthenticationProvider authenticationProvider,
+            SecurityContextRepository securityContextRepository) throws Exception {
 
         http
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable())
             .authenticationProvider(authenticationProvider)
+            .securityContext(context -> context
+                    .securityContextRepository(securityContextRepository))
             .authorizeHttpRequests(auth -> auth     // writing temporary code for
                     .anyRequest().permitAll()                                    // allowing permit without login
             );
