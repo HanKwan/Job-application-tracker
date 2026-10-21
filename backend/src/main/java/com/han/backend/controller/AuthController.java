@@ -1,6 +1,7 @@
 package com.han.backend.controller;
 
 
+import com.han.backend.dto.LoginRequest;
 import com.han.backend.dto.RegisterRequest;
 import com.han.backend.entity.User;
 import com.han.backend.repository.UserRepository;
@@ -39,4 +40,21 @@ public class AuthController {
         return "Registration successful.";
     }
 
+
+    @PostMapping("/login")
+    public String login(@RequestBody LoginRequest request) {
+
+        User user = userRepository.findByEmail(request.getEmail())
+                .orElse(null);
+
+        if (user == null) {
+            return "Email or password is incorrect.";
+        }
+
+        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
+            return "Email or password is incorrect.";
+        }
+
+        return "Login successful.";
+    }
 }
