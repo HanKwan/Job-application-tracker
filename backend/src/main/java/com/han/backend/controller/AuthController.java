@@ -5,7 +5,16 @@ import com.han.backend.dto.LoginRequest;
 import com.han.backend.dto.RegisterRequest;
 import com.han.backend.entity.User;
 import com.han.backend.repository.UserRepository;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.security.authentication.AuthenticationManager;
+import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContext;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.crypto.password.PasswordEncoder;
+import org.springframework.security.web.context.HttpSessionSecurityContextRepository;
+import org.springframework.security.web.context.SecurityContextRepository;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -17,10 +26,15 @@ public class AuthController {
 
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
+    private final AuthenticationManager authenticationManager;
+    private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
 
-    public AuthController(UserRepository userRepository, PasswordEncoder passwordEncoder) {
+    public AuthController(UserRepository userRepository,
+                          PasswordEncoder passwordEncoder,
+                          AuthenticationManager authenticationManager) {
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
+        this.authenticationManager = authenticationManager;
     }
 
     @PostMapping("/register")
@@ -42,18 +56,29 @@ public class AuthController {
 
 
     @PostMapping("/login")
-    public String login(@RequestBody LoginRequest request) {
+    public String login(@RequestBody LoginRequest request,
+                        HttpServletRequest httpRequest,
+                        HttpServletResponse httpResponse) {
 
-        User user = userRepository.findByEmail(request.getEmail())
-                .orElse(null);
+        // login checks user and pw through AuthManager
+        // and hold the result of successful credential verification
+        Authentication authentication =
+                authenticationManager.authenticate(
+                        new UsernamePasswordAuthenticationToken(
+                                request.getEmail(),
+                                request.getPassword()
+                        )
+                );
 
-        if (user == null) {
-            return "Email or password is incorrect.";
-        }
+        // hold the authenticated user's identity for spring security
+        SecurityContext context = SecurityContextHolder.createEmptyContext();
 
-        if (!passwordEncoder.matches(request.getPassword(), user.getPassword())) {
-            return "Email or password is incorrect.";
-        }
+        context.setAuthentication(authentication);
+        SecurityContextHolder.setContext(context);  // makes that context available during the current request.
+
+        securityContextRepository.saveContext(
+                context, httpRequest, httpResponse
+        );
 
         return "Login successful.";
     }
