@@ -13,12 +13,16 @@ import org.springframework.security.web.SecurityFilterChain;
 @Configuration
 public class SecurityConfig {
 
+    // check if the requests against the rules
     @Bean
-    public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
+    public SecurityFilterChain securityFilterChain(
+            HttpSecurity http,
+            DaoAuthenticationProvider authenticationProvider) throws Exception {
 
         http
             .cors(Customizer.withDefaults())
             .csrf(csrf -> csrf.disable())
+            .authenticationProvider(authenticationProvider)
             .authorizeHttpRequests(auth -> auth     // writing temporary code for
                     .anyRequest().permitAll()                                    // allowing permit without login
             );
