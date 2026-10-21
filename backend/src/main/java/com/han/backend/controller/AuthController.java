@@ -27,14 +27,17 @@ public class AuthController {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
     private final AuthenticationManager authenticationManager;
-    private final SecurityContextRepository securityContextRepository = new HttpSessionSecurityContextRepository();
+    private final SecurityContextRepository securityContextRepository;
 
     public AuthController(UserRepository userRepository,
                           PasswordEncoder passwordEncoder,
-                          AuthenticationManager authenticationManager) {
+                          AuthenticationManager authenticationManager,
+                          SecurityContextRepository securityContextRepository) {
+
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
         this.authenticationManager = authenticationManager;
+        this.securityContextRepository = securityContextRepository;
     }
 
     @PostMapping("/register")
