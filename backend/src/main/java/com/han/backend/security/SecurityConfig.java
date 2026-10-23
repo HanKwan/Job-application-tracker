@@ -28,8 +28,11 @@ public class SecurityConfig {
             .authenticationProvider(authenticationProvider)
             .securityContext(context -> context
                     .securityContextRepository(securityContextRepository))
-            .authorizeHttpRequests(auth -> auth     // writing temporary code for
-                    .anyRequest().permitAll()                                    // allowing permit without login
+            .authorizeHttpRequests(auth -> auth
+                    .requestMatchers("/api/auth/register", "/api/auth/login").permitAll()
+                    .requestMatchers("/api/auth/me").authenticated()
+                    .requestMatchers("/api/applications/**").authenticated()    // all endpoints after /applications/
+                    .anyRequest().permitAll()
             );
 
         return http.build();
