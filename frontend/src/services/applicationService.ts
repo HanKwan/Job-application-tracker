@@ -3,7 +3,9 @@ import type { CreateApplicationType } from "../types/AppType";
 const API_URL = "http://localhost:8080/api/applications";
 
 export const getApplications = async () => {
-    const response = await fetch(API_URL);
+    const response = await fetch(API_URL, {
+        credentials: "include",
+    });
 
     if (!response.ok) {
         throw new Error("Failed to fetch applications")
@@ -15,6 +17,7 @@ export const getApplications = async () => {
 export const createApplication = async (application: CreateApplicationType) => {
     const response = await fetch(API_URL, {
         method: "POST",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
@@ -27,6 +30,7 @@ export const createApplication = async (application: CreateApplicationType) => {
 export const deleteApplication = async (applicationId: number) => {
     const response = await fetch(API_URL + "/" + applicationId, {
         method: "DELETE",
+        credentials: "include",
     })
     
     if (!response.ok) {
@@ -38,6 +42,7 @@ export const updateApplication = async (applicationId: number, application: Crea
     
     const response = await fetch(API_URL + "/" + applicationId, {
         method: "PUT",
+        credentials: "include",
         headers: {
             "Content-Type": "application/json",
         },
