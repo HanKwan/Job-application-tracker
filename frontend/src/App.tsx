@@ -1,5 +1,6 @@
 import './css/App.css'
 import Home from './pages/Home'
+import Login from './pages/Login'
 
 function App() {
   return (
@@ -12,7 +13,7 @@ function App() {
         </p>
       </header>
 
-      <Home />
+      <Login />
     </main>
   )
 }
