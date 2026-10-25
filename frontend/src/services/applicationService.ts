@@ -4,8 +4,8 @@ const API_URL = "http://localhost:8080/api/applications";
 
 export const getApplications = async () => {
     const response = await fetch(API_URL, {
-        credentials: "include",
-    });
+        credentials: "include",     // Include cookies in the request 
+    });                             // so that the server can identify the user session
 
     if (!response.ok) {
         throw new Error("Failed to fetch applications")
