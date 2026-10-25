@@ -1,14 +1,19 @@
 import { useState } from "react";
+import { login } from "../services/authService";
 
 function Login() {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
 
-    const handleSubmit = (event: React.SubmitEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
 
-        console.log("Email:", email);
-        console.log("Password:", password);
+        try {
+            await login(email, password);   // call api function from the backend service
+            console.log("Login successful");
+        } catch (error) {
+            console.error("Login failed:", error);
+        }
     };
 
     return (
