@@ -6,7 +6,11 @@ import { useEffect, useState } from "react"
 import { createApplication, deleteApplication, getApplications, updateApplication } from "../services/applicationService"
 import SearchBar from "../components/SearchBar"
 
-function Home () {
+type HomeProps = {
+    onLogout: () => void
+}
+
+function Home ({ onLogout }: HomeProps) {
 
     const [appliedApp, setAppliedApp] = useState<AppItem[]>([])
     console.log(appliedApp);
@@ -65,6 +69,9 @@ function Home () {
     
     return (
         <div className="container">
+            <button className="logout-button" onClick={onLogout}>
+                Logout</button>
+
             <ApplicationForm 
                 onAdd={handleAdd}
                 onUpdate={handleUpdate}

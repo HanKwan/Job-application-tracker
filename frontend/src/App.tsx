@@ -2,12 +2,26 @@ import { useEffect, useState } from 'react'
 import './css/App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
-import { AuthError, checkSession } from './services/authService'
+import { AuthError, checkSession, logout } from './services/authService'
 
 function App() {
   const [isAuthenticated, setIsAuthenticated] = useState(false)
   const [isCheckingSession, setIsCheckingSession] = useState(true)
   const [sessionError, setSessionError] = useState('')
+
+  const handleLogout = async () => {
+    try {
+      await logout()    // send request to backend to log out
+      setIsAuthenticated(false) // switch to login page
+      setSessionError('')
+    } catch (error: unknown) {
+      setSessionError(
+        error instanceof AuthError
+          ? error.message
+          : 'Logout failed. Please try again.'
+      )
+    }
+  }
 
   useEffect(() => {
     let isMounted = true
@@ -47,7 +61,7 @@ function App() {
       {isCheckingSession ? (
         <p role="status">Checking your session...</p>
       ) : isAuthenticated ? (
-        <Home />
+        <Home onLogout={handleLogout} />
       ) : (
         <>
           {sessionError && <p role="alert">{sessionError}</p>}
