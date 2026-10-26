@@ -1,18 +1,32 @@
 import { useState } from "react";
-import { login } from "../services/authService";
+import { AuthError, login } from "../services/authService";
 
-function Login() {
+type LoginProps = {
+    onLoginSuccess: () => void;
+};
+
+function Login({ onLoginSuccess }: LoginProps) {
     const [email, setEmail] = useState("");
     const [password, setPassword] = useState("");
+    const [errorMessage, setErrorMessage] = useState("");
+    const [isSubmitting, setIsSubmitting] = useState(false);
 
     const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
+        setErrorMessage("");
+        setIsSubmitting(true);
 
         try {
-            await login(email, password);   // call api function from the backend service
-            console.log("Login successful");
+            await login(email, password);
+            onLoginSuccess();
         } catch (error) {
-            console.error("Login failed:", error);
+            setErrorMessage(
+                error instanceof AuthError
+                    ? error.message
+                    : "Login failed unexpectedly. Please try again."
+            );
+        } finally {
+            setIsSubmitting(false);
         }
     };
 
@@ -20,6 +34,8 @@ function Login() {
         <div className="login-page">
             <form className="login-form" onSubmit={handleSubmit}>
                 <h2 className="login-title">Login</h2>
+
+                {errorMessage && <p role="alert">{errorMessage}</p>}
 
                 <div className="login-field">
                     <label className="login-label" htmlFor="email">
@@ -51,8 +67,8 @@ function Login() {
                     />
                 </div>
 
-                <button className="login-button" type="submit">
-                    Login
+                <button className="login-button" type="submit" disabled={isSubmitting}>
+                    {isSubmitting ? "Logging in..." : "Login"}
                 </button>
             </form>
         </div>

@@ -1,8 +1,39 @@
+import { useEffect, useState } from 'react'
 import './css/App.css'
 import Home from './pages/Home'
 import Login from './pages/Login'
+import { AuthError, checkSession } from './services/authService'
 
 function App() {
+  const [isAuthenticated, setIsAuthenticated] = useState(false)
+  const [isCheckingSession, setIsCheckingSession] = useState(true)
+  const [sessionError, setSessionError] = useState('')
+
+  useEffect(() => {
+    let isMounted = true
+
+    checkSession()
+      .then((hasSession) => {
+        if (isMounted) setIsAuthenticated(hasSession)
+      })
+      .catch((error: unknown) => {
+        if (isMounted) {
+          setSessionError(
+            error instanceof AuthError
+              ? error.message
+              : 'The session could not be checked. Please try again.'
+          )
+        }
+      })
+      .finally(() => {
+        if (isMounted) setIsCheckingSession(false)
+      })
+
+    return () => {
+      isMounted = false
+    }
+  }, [])
+
   return (
     <main className="app-shell">
       <header className="app-header">
@@ -13,7 +44,21 @@ function App() {
         </p>
       </header>
 
-      <Login />
+      {isCheckingSession ? (
+        <p role="status">Checking your session...</p>
+      ) : isAuthenticated ? (
+        <Home />
+      ) : (
+        <>
+          {sessionError && <p role="alert">{sessionError}</p>}
+          <Login
+            onLoginSuccess={() => {
+              setSessionError('')
+              setIsAuthenticated(true)
+            }}
+          />
+        </>
+      )}
     </main>
   )
 }
