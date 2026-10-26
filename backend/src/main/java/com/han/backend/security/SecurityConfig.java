@@ -42,6 +42,8 @@ public class SecurityConfig {
                         .invalidateHttpSession(true)    // invalidates current session so it can't ve used to stay logged in
                         .clearAuthentication(true)
                         .deleteCookies("JSESSIONID")
+                        .logoutSuccessHandler((request, response, authentication) ->
+                                response.setStatus(200))
                         .permitAll()    // allows the logout request without requiring a separate authorization rule.
                 );
 
