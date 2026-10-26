@@ -61,3 +61,27 @@ export const checkSession = async (): Promise<boolean> => {
 
     return true;
 };
+
+
+export const logout = async (): Promise<void> => {
+    let response: Response;
+
+    try {
+        response = await fetch(`${API_URL}/logout`, {
+            method: "POST",
+            credentials: "include",
+        });
+    } catch {
+        throw new AuthError(
+            "Cannot reach the server. Logout failed.",
+            "unavailable"
+        );
+    }
+
+    if (!response.ok) {
+        throw new AuthError(
+            "The server could not complete logout. Please try again.",
+            "unavailable"
+        );
+    }
+};
