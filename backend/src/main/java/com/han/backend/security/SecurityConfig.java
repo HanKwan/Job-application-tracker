@@ -36,7 +36,14 @@ public class SecurityConfig {
                     .requestMatchers("/api/auth/me").authenticated()
                     .requestMatchers("/api/applications/**").authenticated()    // all endpoints after /applications/
                     .anyRequest().permitAll()
-            );
+            )
+                .logout(logout -> logout
+                        .logoutUrl("/api/auth/logout")
+                        .invalidateHttpSession(true)    // invalidates current session so it can't ve used to stay logged in
+                        .clearAuthentication(true)
+                        .deleteCookies("JSESSIONID")
+                        .permitAll()    // allows the logout request without requiring a separate authorization rule.
+                );
 
         return http.build();
     }
