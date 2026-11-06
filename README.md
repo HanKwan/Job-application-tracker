@@ -1,82 +1,96 @@
-# Job Application Tracker  
-就職活動の応募状況を管理するフルスタックWebアプリです。
+# Job Application Tracker
 
-A full-stack web application for tracking job applications and their statuses.
+就職活動の応募状況を管理するフルスタックWebアプリケーションです。
+
+A full-stack web application for managing job applications and tracking their progress.
 
 ---
 
 ## Features / 主な機能
-- Add new job applications / 応募の追加  
-- View application list / 応募一覧の表示 
-- Search and filter applications / 応募の検索・絞り込み 
-- Edit application details / 応募情報の編集  
-- Delete applications / 応募の削除  
-- REST API communication between frontend and backend / フロントエンドとバックエンドの連携  
-- MySQL database persistence / MySQLへのデータ保存  
+
+- Add, view, edit, and delete job applications
+- Search and filter applications
+- User registration and login
+- Session-based authentication
+- Password hashing with BCrypt
+- Associate applications with individual users
+- Restrict application access based on ownership
+- REST API communication between frontend and backend
+- MySQL database persistence
 
 ---
 
 ## Tech Stack / 使用技術
 
 ### Frontend
-- React  
-- TypeScript 
-- CSS  
+
+- React
+- TypeScript
+- Vite
+- CSS
 
 ### Backend
-- Spring Boot  
-- Java  
-- REST API  
+
+- Java
+- Spring Boot
+- Spring Data JPA
+- REST API
+- BCrypt
+- Session-based authentication
 
 ### Database
-- MySQL  
+
+- MySQL
 
 ---
 
 ## What I Learned / 学んだこと
-- React + Spring Bootの連携  
-- REST APIの設計と利用  
-- CRUD機能の実装  
-- 検索・絞り込み機能の実装
-- フロントエンドとバックエンドの分離構成  
-- データベース連携（MySQL）  
+
+- Building a full-stack application with React and Spring Boot
+- Designing and implementing REST APIs
+- Implementing CRUD operations and search functionality
+- Implementing user authentication and session management
+- Designing relationships between users and application records
+- Applying ownership-based access control
+- Connecting the frontend, backend, and MySQL database
 
 ---
 
 ## Future Improvements / 今後の改善
-- 応募情報の並び替え機能（応募日・締切日・企業名など）
-- 認証機能（ログイン）
-- メール管理機能
-- メールページでのTo-Do・メモ機能
-- Docker化  
-- AWSなどへのデプロイ  
+
+- Application sorting by application date, deadline, or company name
+- Email management
+- To-do and memo features for managing recruitment tasks
+- Dockerization
+- Deployment using AWS or another cloud platform
 
 ---
 
 ## Running Locally / 起動方法
 
 ### Prerequisites
-- Node.js v18+  
-- Java 17+  
-- MySQL  
 
----
+- Node.js
+- Java 21
+- MySQL
 
 ### Database Setup
+
 ```sql
 CREATE DATABASE job_tracker;
 ```
+
 ### Backend Setup
-```sql
+
+```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
 ### Frontend Setup
-```sql
+
+```bash
 cd frontend
 npm install
 npm run dev
 ```
-
-### Demo Video: https://youtu.be/jhobCZUL3f0
