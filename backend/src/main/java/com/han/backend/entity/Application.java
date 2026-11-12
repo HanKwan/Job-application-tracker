@@ -11,17 +11,28 @@ public class Application {
     @Id
     @GeneratedValue
     private Long id;
+
     private String companyName;
     private String position;
     private String status;
     private String note;
+
     @Column(name = "application_date")
     private LocalDate applicationDate;
+
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
 
     public Application() {
     }
 
-    public Application(Long id, String companyName, String position, String status, String note, LocalDate applicationDate) {
+    public Application(Long id,
+                       String companyName,
+                       String position,
+                       String status,
+                       String note,
+                       LocalDate applicationDate) {
         this.id = id;
         this.companyName = companyName;
         this.position = position;
@@ -54,6 +65,10 @@ public class Application {
         return applicationDate;
     }
 
+    public User getUser() {
+        return user;
+    }
+
     public void setCompanyName(String companyName) {
         this.companyName = companyName;
     }
@@ -72,5 +87,9 @@ public class Application {
 
     public void setApplicationDate(LocalDate applicationDate) {
         this.applicationDate = applicationDate;
+    }
+
+    public void setUser(User user) {
+        this.user = user;
     }
 }

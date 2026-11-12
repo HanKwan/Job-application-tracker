@@ -7,6 +7,8 @@ import com.han.backend.entity.User;
 import com.han.backend.repository.UserRepository;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
@@ -38,12 +40,15 @@ public class AuthController {
     }
 
     @PostMapping("/register")
-    public String register(@RequestBody RegisterRequest request) {
+    public ResponseEntity<String> register(@RequestBody RegisterRequest request) {
+
         String email = request.getEmail();
         String password = request.getPassword();
 
         if (userRepository.findByEmail(email).isPresent()) {
-            return "This email is already registered.";
+            return ResponseEntity
+                    .status(HttpStatus.CONFLICT)
+                    .body("This email is already registered.");
         }
 
         String hashedPassword = passwordEncoder.encode(password);
@@ -51,9 +56,10 @@ public class AuthController {
 
         userRepository.save(user);
 
-        return "Registration successful.";
+        return ResponseEntity
+                .status(HttpStatus.CREATED)
+                .body("Registration successful.");
     }
-
 
     @PostMapping("/login")
     public String login(@RequestBody LoginRequest request,
