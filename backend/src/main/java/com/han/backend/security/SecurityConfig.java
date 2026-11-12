@@ -27,7 +27,7 @@ public class SecurityConfig {
 
         http
             .cors(Customizer.withDefaults())
-            .csrf(csrf -> csrf.disable())
+            .csrf(csrf -> csrf.spa())
             .authenticationProvider(authenticationProvider)
             .securityContext(context -> context
                     .securityContextRepository(securityContextRepository))
@@ -96,7 +96,7 @@ public class SecurityConfig {
 
         // permits JSON content-type
         configuration.setAllowedHeaders(
-                java.util.List.of("Content-Type")
+                java.util.List.of("Content-Type", "X-XSRF-TOKEN")
         );
 
         // allows the browser to send and receive session cookie
