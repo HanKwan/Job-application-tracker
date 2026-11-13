@@ -90,3 +90,59 @@
     line-height: 1.6;
     white-space: pre-wrap;
 }
+
+.detail-field input,
+.detail-field select,
+.detail-field textarea {
+    width: 100%;
+    box-sizing: border-box;
+    padding: 10px 12px;
+
+    border: 1px solid #dce3d8;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #344638;
+    font: inherit;
+    font-size: 0.9rem;
+}
+
+.detail-field textarea {
+    min-height: 110px;
+    resize: vertical;
+}
+
+.detail-field input:focus,
+.detail-field select:focus,
+.detail-field textarea:focus {
+    outline: 2px solid #a8bea1;
+    border-color: #718b6c;
+}
+
+.detail-modal-actions {
+    display: flex;
+    justify-content: flex-end;
+    gap: 10px;
+    padding-top: 12px;
+}
+
+.detail-modal-actions button {
+    padding: 9px 18px;
+    border: 1px solid #dce3d8;
+    border-radius: 8px;
+    background: #ffffff;
+    color: #496447;
+    font: inherit;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+.detail-modal-actions button:last-child {
+    background: #496447;
+    border-color: #496447;
+    color: #ffffff;
+}
+
+.detail-modal-actions button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+}

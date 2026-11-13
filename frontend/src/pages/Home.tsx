@@ -93,6 +93,7 @@ function Home({ onLogout }: HomeProps) {
             {selectedApp && (
                 <ApplicationDetailModal
                     app={selectedApp}
+                    onUpdate={handleUpdate}
                     onClose={() => setSelectedApp(null)}
                 />
             )}

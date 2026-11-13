@@ -13,7 +13,6 @@ const ApplicationForm = (props: Props) => {
     const onAdd = props.onAdd
     const editingApp = props.onEditClick
     const onUpdate = props.onUpdate
-    console.log(editingApp)
 
     const clearEditForm = props.onClearEdit
 
