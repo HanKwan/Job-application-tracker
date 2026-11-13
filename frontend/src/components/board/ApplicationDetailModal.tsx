@@ -9,15 +9,19 @@ interface ApplicationDetailModalProps {
         id: number,
         updatedApp: CreateApplicationType,
     ) => Promise<void>;
+    onDelete: (id: number) => Promise<void>;
 }
 
 function ApplicationDetailModal({
     app,
     onClose,
     onUpdate,
+    onDelete,
 }: ApplicationDetailModalProps) {
     const [isEditing, setIsEditing] = useState(false);
     const [currentApp, setCurrentApp] = useState(app);
+    const [isDeleting, setIsDeleting] = useState(false);
+    const [showDeleteConfirm, setShowDeleteConfirm] = useState(false);
 
     const [companyName, setCompanyName] = useState(app.companyName);
     const [position, setPosition] = useState(app.position);
@@ -97,6 +101,18 @@ function ApplicationDetailModal({
             console.error("Failed to update application:", error);
         } finally {
             setIsSaving(false);
+        }
+    };
+
+    const handleDelete = async () => {
+        try {
+            setIsDeleting(true);
+            await onDelete(currentApp.id);
+            onClose();
+        } catch (error) {
+            console.error("Failed to delete application:", error);
+        } finally {
+            setIsDeleting(false);
         }
     };
 
@@ -201,6 +217,36 @@ function ApplicationDetailModal({
                             </button>
                         </div>
                     </form>
+                ) : showDeleteConfirm ? (
+                    <div className="delete-confirm-content">
+                        <h3>Delete Application?</h3>
+                        <p>
+                            Are you sure you want to delete{" "}
+                            <strong>{currentApp.companyName}</strong>?
+                        </p>
+                        <p className="delete-warning">
+                            This action cannot be undone.
+                        </p>
+
+                        <div className="delete-confirm-actions">
+                            <button
+                                type="button"
+                                onClick={() => setShowDeleteConfirm(false)}
+                                disabled={isDeleting}
+                            >
+                                Cancel
+                            </button>
+
+                            <button
+                                type="button"
+                                className="confirm-delete-btn"
+                                onClick={handleDelete}
+                                disabled={isDeleting}
+                            >
+                                {isDeleting ? "Deleting..." : "Confirm Delete"}
+                            </button>
+                        </div>
+                    </div>
                 ) : (
                     <>
                         <div className="detail-modal-content">
@@ -230,6 +276,15 @@ function ApplicationDetailModal({
                         </div>
 
                         <div className="detail-modal-actions">
+                            <button
+                                type="button"
+                                className="delete-modal-btn"
+                                onClick={() => setShowDeleteConfirm(true)}
+                                disabled={isDeleting}
+                            >
+                                {isDeleting ? "Deleting..." : "Delete"}
+                            </button>
+
                             <button type="button" onClick={handleEdit}>
                                 Edit
                             </button>

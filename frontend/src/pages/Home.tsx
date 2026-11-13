@@ -94,6 +94,7 @@ function Home({ onLogout }: HomeProps) {
                 <ApplicationDetailModal
                     app={selectedApp}
                     onUpdate={handleUpdate}
+                    onDelete={handleDelete}
                     onClose={() => setSelectedApp(null)}
                 />
             )}
