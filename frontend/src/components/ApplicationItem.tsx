@@ -34,8 +34,13 @@ const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationPr
             <p><strong>Company's name:</strong> {app.companyName}</p>
 
             <p>
-                <strong>Position:</strong> {app.position} | {" "}
-                <strong>Date:</strong> {app.applicationDate}
+                <strong>Position:</strong> {app.position}
+                {app.applicationDate && (
+                    <>
+                        {" | "}
+                        <strong>Date:</strong> {app.applicationDate}
+                    </>
+                )}
             </p>
 
             <div className="status-container">

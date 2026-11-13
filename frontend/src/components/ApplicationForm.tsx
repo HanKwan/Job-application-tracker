@@ -30,44 +30,51 @@ const ApplicationForm = (props: Props) => {
                 setCompanyName(editingApp.companyName)
                 setPosition(editingApp.position)
                 setStatus(editingApp.status)
-                setApplicationDate(editingApp.applicationDate?.slice(0, 10) || today())
+                setApplicationDate(editingApp.applicationDate?.slice(0, 10) || "");
                 setNote(editingApp.note)
             }
         }, [editingApp])
 
     const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
-        e.preventDefault()
+        e.preventDefault();
 
-        if (!companyName || !status) return
+        if (!companyName.trim() || !status) return;
 
-        const newApp: CreateApplicationType = {
-            // id: Date.now(),  // spring will generate the id
+        if (status !== "Wish List" && !applicationDate) {
+            return;
+        }
+
+        const applicationData: CreateApplicationType = {
             companyName,
             position,
             status,
             note,
-            applicationDate,
-        }
+            applicationDate: status === "Wish List" ? null : applicationDate,
+        };
 
         if (editingApp) {
-            onUpdate(editingApp.id, {
-                companyName,
-                position,
-                status,
-                note,
-                applicationDate,
-            })
+            onUpdate(editingApp.id, applicationData);
         } else {
-            onAdd(newApp)
+            onAdd(applicationData);
         }
 
-        setCompanyName("")
-        setPosition("")
-        setStatus("Applied")
-        setApplicationDate(today())
-        setNote("")
-        clearEditForm()
-    }
+        setCompanyName("");
+        setPosition("");
+        setStatus("Applied");
+        setApplicationDate(today());
+        setNote("");
+        clearEditForm();
+    };
+
+    const handleStatusChange = (newStatus: string) => {
+        setStatus(newStatus);
+
+        if (newStatus === "Wish List") {
+            setApplicationDate("");
+        } else if (!applicationDate) {
+            setApplicationDate(today());
+        }
+    };
 
     return (
         <form className="app-form" onSubmit={handleAdd}>
@@ -83,8 +90,10 @@ const ApplicationForm = (props: Props) => {
                     onChange={(e) => setPosition(e.target.value)}
                     placeholder="Enter position..."/>
             
-            <select value={status} onChange={(e) => setStatus(e.target.value)}>
+            <select value={status} onChange={(e) => handleStatusChange(e.target.value)}>
+                <option value="Wish List">Wish List</option>
                 <option value="Applied">Applied</option>
+                <option value="Screening">Screening</option>
                 <option value="Interview-1">Interview-1</option>
                 <option value="Interview-2">Interview-2</option>
                 <option value="Interview-3">Interview-3</option>
@@ -93,9 +102,13 @@ const ApplicationForm = (props: Props) => {
                 <option value="Rejected">Rejected</option>
             </select>
 
-            <input type="date" 
-                    value={applicationDate}
-                    onChange={(e) => setApplicationDate(e.target.value)}/>
+            <input
+                type="date"
+                value={applicationDate}
+                onChange={(e) => setApplicationDate(e.target.value)}
+                required={status !== "Wish List"}
+                disabled={status === "Wish List"}
+            />
 
             <textarea
                 value={note}

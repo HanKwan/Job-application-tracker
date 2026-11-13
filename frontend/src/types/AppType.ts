@@ -3,7 +3,7 @@ export interface AppItem {
     companyName: string;
     position: string;
     status: string;
-    applicationDate: string;
+    applicationDate: string | null;
     note: string;
 }
 
@@ -11,6 +11,6 @@ export interface CreateApplicationType {
     companyName: string;
     position: string;
     status: string;
-    applicationDate: string;
+    applicationDate: string | null;
     note: string;
 }
