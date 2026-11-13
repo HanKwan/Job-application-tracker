@@ -1,74 +1,27 @@
-import "../css/AppItem.css"
-import type { AppItem, CreateApplicationType } from "../types/AppType"
+import "../css/AppItem.css";
+import type { AppItem } from "../types/AppType";
 
 interface ApplicationProps {
-    app: AppItem
-    onUpdate: (id: number, updatedApp: CreateApplicationType) => void
-    onDelete: (id: number) => void
-    onEditClick: (app: AppItem) => void
+    app: AppItem;
+    onViewClick: (app: AppItem) => void;
 }
 
-const ApplicationItem = ({ app, onUpdate, onDelete, onEditClick }: ApplicationProps) => {
-
-    const statuses = ["Applied",
-                        "Screening",
-                        "Interview-1", 
-                        "Interview-2", 
-                        "Interview-3", 
-                        "Final-interview", 
-                        "Offered", 
-                        "Rejected"]
-
-    const handleStatusChange = (newStatus: string) => {
-        onUpdate(app.id, {
-            companyName: app.companyName,
-            position: app.position,
-            status: newStatus,
-            note: app.note,
-            applicationDate: app.applicationDate
-        })
-    }
-
+const ApplicationItem = ({ app, onViewClick }: ApplicationProps) => {
     return (
-        <div className="app-item">
-            <p><strong>Company's name:</strong> {app.companyName}</p>
+        <button
+            type="button"
+            className="app-item"
+            onClick={() => onViewClick(app)}
+        >
+            <h3>{app.companyName}</h3>
 
-            <p>
-                <strong>Position:</strong> {app.position}
-                {app.applicationDate && (
-                    <>
-                        {" | "}
-                        <strong>Date:</strong> {app.applicationDate}
-                    </>
-                )}
-            </p>
+            <p className="app-position">{app.position}</p>
 
-            <div className="status-container">
-                <strong>Status:</strong>
-            
-                <select className={`status-select status-${app.status}`} 
-                        value={app.status} 
-                        onChange={(e) => handleStatusChange(e.target.value)}>
-
-                    {statuses.map(s => (
-                        <option key={s} 
-                                value={s}>
-                                    {s}
-                        </option>
-                    ))}
-                </select>
-            </div>
-            
-            {app.note && (
-                <p className="note">{app.note}</p>
+            {app.applicationDate && (
+                <p className="app-date">{app.applicationDate}</p>
             )}
+        </button>
+    );
+};
 
-            <div className="app-actions">
-                <button className="edit-btn" onClick={() => onEditClick(app)}>Edit</button>
-                <button className="delete-btn" onClick={() => onDelete(app.id)}>Delete</button>
-            </div>
-        </div>
-    )
-}
-
-export default ApplicationItem
+export default ApplicationItem;

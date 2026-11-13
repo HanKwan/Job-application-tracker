@@ -1,28 +1,31 @@
-import ApplicationItem from "./ApplicationItem"
-import type { AppItem, CreateApplicationType } from "../types/AppType"
-import "../css/AppList.css"
+// import ApplicationItem from "./ApplicationItem"
+// import type { AppItem, CreateApplicationType } from "../types/AppType"
+// import "../css/AppList.css"
 
-interface ApplicationProps {
-    applications: AppItem[]
-    onUpdate: (id: number, updatedApp: CreateApplicationType) => void
-    onDelete: (id: number) => void
-    onEditClick: (app: AppItem) => void 
-}
+// interface ApplicationProps {
+//     applications: AppItem[]
+//     onUpdate: (id: number, updatedApp: CreateApplicationType) => void
+//     onDelete: (id: number) => void
+//     onEditClick: (app: AppItem) => void 
+//     onclickView: (app: AppItem) => void
+// }
 
-const ApplicationList = ({ applications, onUpdate, onDelete, onEditClick }: ApplicationProps) => {
+// const ApplicationList = ({ applications, onUpdate, onDelete, onEditClick }: ApplicationProps) => {
 
-    return (
-        <div className="app-list">
-            {applications.map(app => 
-                <ApplicationItem key={app.id} 
-                                 app={app} 
-                                 onUpdate={onUpdate} 
-                                 onDelete={onDelete}
-                                 onEditClick={onEditClick}/>
-            )}
-        </div>
-    )
+//     return (
+//         <div className="app-list">
+//             {applications.map(app => 
+//                 <ApplicationItem key={app.id} 
+//                                  app={app} 
+//                                  onUpdate={onUpdate} 
+//                                  onDelete={onDelete}
+//                                  onEditClick={onEditClick}
+//                                  onViewClick={onViewClick}
+//                                 />
+//             )}
+//         </div>
+//     )
 
-}
+// }
 
-export default ApplicationList
+// export default ApplicationList

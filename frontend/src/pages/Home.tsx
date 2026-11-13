@@ -1,7 +1,8 @@
 import { useEffect, useState } from "react";
 import MainLayout from "../components/layout/MainLayout";
 import ApplicationForm from "../components/ApplicationForm";
-import ApplicationList from "../components/ApplicationList";
+import ApplicationBoard from "../components/board/ApplicationBoard";
+import ApplicationDetailModal from "../components/board/ApplicationDetailModal";
 import SearchBar from "../components/SearchBar";
 import type { AppItem, CreateApplicationType } from "../types/AppType";
 import "../css/Home.css";
@@ -20,6 +21,7 @@ function Home({ onLogout }: HomeProps) {
     const [appliedApp, setAppliedApp] = useState<AppItem[]>([]);
     const [editingApp, setEditingApp] = useState<AppItem | null>(null);
     const [searchText, setSearchText] = useState("");
+    const [selectedApp, setSelectedApp] = useState<AppItem | null>(null);
 
     const loadApplications = async () => {
         try {
@@ -82,13 +84,18 @@ function Home({ onLogout }: HomeProps) {
                     setSearchText={setSearchText}
                 />
 
-                <ApplicationList
+                <ApplicationBoard
                     applications={filteredApps}
-                    onUpdate={handleUpdate}
-                    onDelete={handleDelete}
-                    onEditClick={handleEditClick}
+                    onViewClick={setSelectedApp}
                 />
             </div>
+
+            {selectedApp && (
+                <ApplicationDetailModal
+                    app={selectedApp}
+                    onClose={() => setSelectedApp(null)}
+                />
+            )}
         </MainLayout>
     );
 }
