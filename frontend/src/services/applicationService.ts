@@ -1,4 +1,5 @@
 import type { CreateApplicationType } from "../types/AppType";
+import { getCsrfHeaders } from "./authService";
 
 const API_URL = "http://localhost:8080/api/applications";
 
@@ -20,6 +21,7 @@ export const createApplication = async (application: CreateApplicationType) => {
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
+            ...await getCsrfHeaders()
         },
         body: JSON.stringify(application)
     })
@@ -31,6 +33,7 @@ export const deleteApplication = async (applicationId: number) => {
     const response = await fetch(API_URL + "/" + applicationId, {
         method: "DELETE",
         credentials: "include",
+        headers: await getCsrfHeaders()
     })
     
     if (!response.ok) {
@@ -45,6 +48,7 @@ export const updateApplication = async (applicationId: number, application: Crea
         credentials: "include",
         headers: {
             "Content-Type": "application/json",
+            ...await getCsrfHeaders()
         },
         body: JSON.stringify(application)
     })
