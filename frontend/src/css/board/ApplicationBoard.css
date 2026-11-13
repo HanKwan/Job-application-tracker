@@ -1,0 +1,144 @@
+.application-board {
+    display: flex;
+    align-items: stretch;
+    gap: 16px;
+
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+
+    overflow-x: auto;
+    overflow-y: hidden;
+
+    padding: 4px 2px 16px;
+}
+
+.application-column {
+    flex: 0 0 280px;
+    width: 280px;
+    min-width: 280px;
+
+    display: flex;
+    flex-direction: column;
+
+    height: 65vh;
+    min-height: 400px;
+    max-height: 700px;
+
+    background: #f6f8f2;
+    border: 1px solid #e4e9df;
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.column-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    flex-shrink: 0;
+    padding: 14px 16px;
+
+    background: #f6f8f2;
+    border-bottom: 1px solid #e4e9df;
+}
+
+.column-header h3 {
+    margin: 0;
+    font-size: 0.95rem;
+    font-weight: 600;
+    color: #344638;
+}
+
+.column-header span {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    min-width: 24px;
+    height: 24px;
+    padding: 0 6px;
+
+    border-radius: 12px;
+    background: #e5eae2;
+    color: #596558;
+    font-size: 0.8rem;
+    font-weight: 600;
+}
+
+.column-content {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+
+    flex: 1;
+    min-height: 0;
+    overflow-y: auto;
+
+    padding: 12px;
+}
+
+/* Wish List - Lavender */
+.column-wishlist {
+    --column-bg: #f8f5e8;
+    --column-header-bg: #eee5bd;
+    --column-text: #79683b;
+}
+
+/* Applied - Blue */
+.column-applied {
+    --column-bg: #edf2f8;
+    --column-header-bg: #dce6f1;
+    --column-text: #49627f;
+}
+
+/* Screening - Cyan */
+.column-screening {
+    --column-bg: #eaf3f3;
+    --column-header-bg: #d7e9e8;
+    --column-text: #416d6b;
+}
+
+/* Interviewing - Amber */
+.column-interviewing {
+    --column-bg: #f7f1e7;
+    --column-header-bg: #eee2cc;
+    --column-text: #81663d;
+}
+
+/* Offered - Green */
+.column-offered {
+    --column-bg: #edf3eb;
+    --column-header-bg: #dce9d8;
+    --column-text: #52714d;
+}
+
+/* Rejected - Rose */
+.column-rejected {
+    --column-bg: #f6eded;
+    --column-header-bg: #ecdcdc;
+    --column-text: #875957;
+}
+
+.application-column {
+    background: var(--column-bg);
+}
+
+.column-header {
+    background: var(--column-header-bg);
+    border-bottom-color: transparent;
+}
+
+.column-header h3 {
+    color: var(--column-text);
+    font-weight: 700;
+}
+
+.column-header span {
+    background: rgba(255, 255, 255, 0.65);
+    color: var(--column-text);
+}
+
+.column-content {
+    background: var(--column-bg);
+}

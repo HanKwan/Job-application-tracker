@@ -1,5 +1,6 @@
 import type { AppItem } from "../../types/AppType";
 import ApplicationItem from "../ApplicationItem";
+import "../../css/board/ApplicationBoard.css";
 
 interface ApplicationBoardProps {
     applications: AppItem[];
@@ -7,9 +8,9 @@ interface ApplicationBoardProps {
 }
 
 const columns = [
-    { title: "Wish List", statuses: ["Wish List"] },
-    { title: "Applied", statuses: ["Applied"] },
-    { title: "Screening", statuses: ["Screening"] },
+    { title: "Wish List", statuses: ["Wish List"], color: "wishlist" },
+    { title: "Applied", statuses: ["Applied"], color: "applied" },
+    { title: "Screening", statuses: ["Screening"], color: "screening" },
     {
         title: "Interviewing",
         statuses: [
@@ -18,9 +19,10 @@ const columns = [
             "Interview-3",
             "Final-interview",
         ],
+        color: "interviewing",
     },
-    { title: "Offered", statuses: ["Offered"] },
-    { title: "Rejected", statuses: ["Rejected"] },
+    { title: "Offered", statuses: ["Offered"], color: "offered" },
+    { title: "Rejected", statuses: ["Rejected"], color: "rejected" },
 ];
 
 function ApplicationBoard({
@@ -35,7 +37,7 @@ function ApplicationBoard({
                 );
 
                 return (
-                    <div className="application-column" key={column.title}>
+                    <div className={`application-column column-${column.color}`} key={column.title}>
                         <div className="column-header">
                             <h3>{column.title}</h3>
                             <span>{columnApps.length}</span>

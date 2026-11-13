@@ -206,14 +206,19 @@ function ApplicationDetailModal({
                         <div className="detail-modal-actions">
                             <button
                                 type="button"
+                                className="modal-btn modal-btn-secondary"
                                 onClick={handleCancel}
                                 disabled={isSaving}
                             >
                                 Cancel
                             </button>
 
-                            <button type="submit" disabled={isSaving}>
-                                {isSaving ? "Saving..." : "Save"}
+                            <button
+                                type="submit"
+                                className="modal-btn modal-btn-primary"
+                                disabled={isSaving}
+                            >
+                                {isSaving ? "Saving..." : "Save changes"}
                             </button>
                         </div>
                     </form>
@@ -231,19 +236,20 @@ function ApplicationDetailModal({
                         <div className="delete-confirm-actions">
                             <button
                                 type="button"
+                                className="modal-btn modal-btn-secondary"
                                 onClick={() => setShowDeleteConfirm(false)}
                                 disabled={isDeleting}
                             >
-                                Cancel
+                                Keep application
                             </button>
 
                             <button
                                 type="button"
-                                className="confirm-delete-btn"
+                                className="modal-btn modal-btn-danger"
                                 onClick={handleDelete}
                                 disabled={isDeleting}
                             >
-                                {isDeleting ? "Deleting..." : "Confirm Delete"}
+                                {isDeleting ? "Deleting..." : "Confirm delete"}
                             </button>
                         </div>
                     </div>
@@ -278,14 +284,18 @@ function ApplicationDetailModal({
                         <div className="detail-modal-actions">
                             <button
                                 type="button"
-                                className="delete-modal-btn"
+                                className="modal-btn modal-btn-danger-outline"
                                 onClick={() => setShowDeleteConfirm(true)}
                                 disabled={isDeleting}
                             >
-                                {isDeleting ? "Deleting..." : "Delete"}
+                                Delete
                             </button>
 
-                            <button type="button" onClick={handleEdit}>
+                            <button
+                                type="button"
+                                className="modal-btn modal-btn-primary"
+                                onClick={handleEdit}
+                            >
                                 Edit
                             </button>
                         </div>

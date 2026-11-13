@@ -3,11 +3,11 @@ import type { AppItem, CreateApplicationType } from "../types/AppType"
 import "../css/AppForm.css"
 
 type Props = {
-    onAdd: (app: CreateApplicationType) => void
-    onUpdate: (id: number, updatedApp: CreateApplicationType) => void
-    onEditClick?: AppItem | null
-    onClearEdit: () => void
-}
+    onAdd: (app: CreateApplicationType) => Promise<void>;
+    onUpdate: (id: number, updatedApp: CreateApplicationType) => Promise<void>;
+    onEditClick?: AppItem | null;
+    onClearEdit: () => void;
+};
 
 const ApplicationForm = (props: Props) => {
     const onAdd = props.onAdd
@@ -34,7 +34,7 @@ const ApplicationForm = (props: Props) => {
             }
         }, [editingApp])
 
-    const handleAdd = (e: React.FormEvent<HTMLFormElement>) => {
+    const handleAdd = async (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault();
 
         if (!companyName.trim() || !status) return;
@@ -44,25 +44,29 @@ const ApplicationForm = (props: Props) => {
         }
 
         const applicationData: CreateApplicationType = {
-            companyName,
+            companyName: companyName.trim(),
             position,
             status,
             note,
             applicationDate: status === "Wish List" ? null : applicationDate,
         };
 
-        if (editingApp) {
-            onUpdate(editingApp.id, applicationData);
-        } else {
-            onAdd(applicationData);
-        }
+        try {
+            if (editingApp) {
+                await onUpdate(editingApp.id, applicationData);
+            } else {
+                await onAdd(applicationData);
+            }
 
-        setCompanyName("");
-        setPosition("");
-        setStatus("Applied");
-        setApplicationDate(today());
-        setNote("");
-        clearEditForm();
+            setCompanyName("");
+            setPosition("");
+            setStatus("Applied");
+            setApplicationDate(today());
+            setNote("");
+            clearEditForm();
+        } catch (err) {
+            console.error("Failed to save application:", err);
+        }
     };
 
     const handleStatusChange = (newStatus: string) => {

@@ -22,6 +22,7 @@ function Home({ onLogout }: HomeProps) {
     const [editingApp, setEditingApp] = useState<AppItem | null>(null);
     const [searchText, setSearchText] = useState("");
     const [selectedApp, setSelectedApp] = useState<AppItem | null>(null);
+    const [isAddModalOpen, setIsAddModalOpen] = useState(false);
 
     const loadApplications = async () => {
         try {
@@ -36,9 +37,26 @@ function Home({ onLogout }: HomeProps) {
         loadApplications();
     }, []);
 
+    useEffect(() => {
+        if (!isAddModalOpen) return;
+
+        const handleKeyDown = (event: KeyboardEvent) => {
+            if (event.key === "Escape") {
+                setIsAddModalOpen(false);
+            }
+        };
+
+        window.addEventListener("keydown", handleKeyDown);
+
+        return () => {
+            window.removeEventListener("keydown", handleKeyDown);
+        };
+    }, [isAddModalOpen]);
+
     const handleAdd = async (newApp: CreateApplicationType) => {
         await createApplication(newApp);
         await loadApplications();
+        setIsAddModalOpen(false);
     };
 
     const handleDelete = async (id: number) => {
@@ -72,23 +90,58 @@ function Home({ onLogout }: HomeProps) {
     return (
         <MainLayout onLogout={onLogout}>
             <div className="container">
-                <ApplicationForm
-                    onAdd={handleAdd}
-                    onUpdate={handleUpdate}
-                    onEditClick={editingApp}
-                    onClearEdit={() => setEditingApp(null)}
-                />
+                <div className="home-toolbar">
+                    <SearchBar
+                        searchText={searchText}
+                        setSearchText={setSearchText}
+                    />
 
-                <SearchBar
-                    searchText={searchText}
-                    setSearchText={setSearchText}
-                />
+                    <button
+                        type="button"
+                        className="add-application-btn"
+                        onClick={() => setIsAddModalOpen(true)}
+                    >
+                        + Add Application
+                    </button>
+                </div>
 
                 <ApplicationBoard
                     applications={filteredApps}
                     onViewClick={setSelectedApp}
                 />
             </div>
+
+            {isAddModalOpen && (
+                <div
+                    className="add-modal-overlay"
+                    onClick={() => setIsAddModalOpen(false)}
+                >
+                    <div
+                        className="add-modal"
+                        onClick={(event) => event.stopPropagation()}
+                    >
+                        <div className="add-modal-header">
+                            <h2>Add Application</h2>
+
+                            <button
+                                type="button"
+                                className="modal-close-btn"
+                                onClick={() => setIsAddModalOpen(false)}
+                                aria-label="Close add application form"
+                            >
+                                ×
+                            </button>
+                        </div>
+
+                        <ApplicationForm
+                            onAdd={handleAdd}
+                            onUpdate={handleUpdate}
+                            onEditClick={editingApp}
+                            onClearEdit={() => setEditingApp(null)}
+                        />
+                    </div>
+                </div>
+            )}
 
             {selectedApp && (
                 <ApplicationDetailModal
