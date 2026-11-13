@@ -1,31 +1,29 @@
-import ApplicationForm from "../components/ApplicationForm"
-import ApplicationList from "../components/ApplicationList"
-import type { AppItem, CreateApplicationType } from "../types/AppType"
-import "../css/Home.css"
-import { useEffect, useState } from "react"
-import { createApplication, deleteApplication, getApplications, updateApplication } from "../services/applicationService"
-import SearchBar from "../components/SearchBar"
+import { useEffect, useState } from "react";
+import MainLayout from "../components/layout/MainLayout";
+import ApplicationForm from "../components/ApplicationForm";
+import ApplicationList from "../components/ApplicationList";
+import SearchBar from "../components/SearchBar";
+import type { AppItem, CreateApplicationType } from "../types/AppType";
+import "../css/Home.css";
+import {
+    createApplication,
+    deleteApplication,
+    getApplications,
+    updateApplication,
+} from "../services/applicationService";
 
 type HomeProps = {
-    onLogout: () => void
-}
+    onLogout: () => void;
+};
 
-function Home ({ onLogout }: HomeProps) {
-
-    const [appliedApp, setAppliedApp] = useState<AppItem[]>([])
-    console.log(appliedApp);
-
-    const [editingApp, setEditingApp] = useState<AppItem | null>(null)
-    console.log(editingApp);
-
-    const [searchText, setSearchText] = useState("")
+function Home({ onLogout }: HomeProps) {
+    const [appliedApp, setAppliedApp] = useState<AppItem[]>([]);
+    const [editingApp, setEditingApp] = useState<AppItem | null>(null);
+    const [searchText, setSearchText] = useState("");
 
     const loadApplications = async () => {
         try {
             const data = await getApplications();
-
-            console.log("backend date:", data);
-            
             setAppliedApp(data);
         } catch (err) {
             console.error(err);
@@ -34,64 +32,65 @@ function Home ({ onLogout }: HomeProps) {
 
     useEffect(() => {
         loadApplications();
-    }, [])
-    
+    }, []);
+
     const handleAdd = async (newApp: CreateApplicationType) => {
-        await createApplication(newApp)
-        await loadApplications()
-    }
+        await createApplication(newApp);
+        await loadApplications();
+    };
 
     const handleDelete = async (id: number) => {
-        await deleteApplication(id)
-        await loadApplications()
-    }
+        await deleteApplication(id);
+        await loadApplications();
+    };
 
-    const handleUpdate = async (id: number, editedApplication: CreateApplicationType) => {
-        await updateApplication(id, editedApplication)
-        await loadApplications()
-    }
+    const handleUpdate = async (
+        id: number,
+        editedApplication: CreateApplicationType,
+    ) => {
+        await updateApplication(id, editedApplication);
+        await loadApplications();
+    };
 
-    // for scrolling back to top + setEditingApp
     const handleEditClick = (app: AppItem) => {
-        setEditingApp(app)
+        setEditingApp(app);
 
         window.scrollTo({
             top: 0,
-            behavior: "smooth"
-        })
-    }
+            behavior: "smooth",
+        });
+    };
 
     const filteredApps = appliedApp.filter((app) => {
-        return app.companyName.toLowerCase().includes(searchText.toLowerCase())
-    })
+        return app.companyName
+            .toLowerCase()
+            .includes(searchText.toLowerCase());
+    });
 
-    console.log(filteredApps);
-    
     return (
-        <div className="container">
-            <button className="logout-button" onClick={onLogout}>
-                Logout</button>
+        <MainLayout onLogout={onLogout}>
+            <div className="container">
+                <ApplicationForm
+                    onAdd={handleAdd}
+                    onUpdate={handleUpdate}
+                    onEditClick={editingApp}
+                    onClearEdit={() => setEditingApp(null)}
+                />
 
-            <ApplicationForm 
-                onAdd={handleAdd}
-                onUpdate={handleUpdate}
-                onEditClick={editingApp}
-                onClearEdit={() => setEditingApp(null)}
-            /> 
+                <SearchBar
+                    searchText={searchText}
+                    setSearchText={setSearchText}
+                />
 
-            <SearchBar 
-                searchText={searchText} 
-                setSearchText={setSearchText}
-            />
-
-            <ApplicationList 
-                applications={filteredApps} 
-                onUpdate={handleUpdate} 
-                onDelete={handleDelete}
-                onEditClick={handleEditClick}
-            />
-        </div>
-    )
+                <ApplicationList
+                    applications={filteredApps}
+                    onUpdate={handleUpdate}
+                    onDelete={handleDelete}
+                    onEditClick={handleEditClick}
+                />
+            </div>
+        </MainLayout>
+    );
 }
 
-export default Home
+export default Home;
