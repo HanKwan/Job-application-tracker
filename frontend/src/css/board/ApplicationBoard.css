@@ -142,3 +142,8 @@
 .column-content {
     background: var(--column-bg);
 }
+
+.application-column.is-over {
+    outline: 2px dashed var(--column-text);
+    outline-offset: 2px;
+}

@@ -71,15 +71,62 @@ function Home({ onLogout }: HomeProps) {
         await updateApplication(id, editedApplication);
         await loadApplications();
     };
+    
+    
+    const handleStatusChange = async (
+        app: AppItem,
+        newStatus: string
+    ) => {
+        const today = new Date();
+        const todayString = [
+            today.getFullYear(),
+            String(today.getMonth() + 1).padStart(2, "0"),
+            String(today.getDate()).padStart(2, "0"),
+        ].join("-");
 
-    const handleEditClick = (app: AppItem) => {
-        setEditingApp(app);
+        const updatedApplication: CreateApplicationType = {
+            companyName: app.companyName,
+            position: app.position,
+            status: newStatus,
+            applicationDate:
+                newStatus === "Wish List"
+                    ? null
+                    : app.applicationDate ?? todayString,
+            note: app.note,
+        };
 
-        window.scrollTo({
-            top: 0,
-            behavior: "smooth",
-        });
+        // Update the UI immediately.
+        setAppliedApp((prev) =>
+            prev.map((item) =>
+                item.id === app.id
+                    ? { ...item, ...updatedApplication }
+                    : item
+            )
+        );
+
+        try {
+            // Save the change to the backend.
+            await updateApplication(app.id, updatedApplication);
+        } catch (err) {
+            console.error("Failed to move application:", err);
+
+            // Restore the previous application if saving fails.
+            setAppliedApp((prev) =>
+                prev.map((item) =>
+                    item.id === app.id ? app : item
+                )
+            );
+        }
     };
+
+    // const handleEditClick = (app: AppItem) => {
+    //     setEditingApp(app);
+
+    //     window.scrollTo({
+    //         top: 0,
+    //         behavior: "smooth",
+    //     });
+    // };
 
     const filteredApps = appliedApp.filter((app) => {
         return app.companyName
@@ -108,6 +155,7 @@ function Home({ onLogout }: HomeProps) {
                 <ApplicationBoard
                     applications={filteredApps}
                     onViewClick={setSelectedApp}
+                    onStatusChange={handleStatusChange}
                 />
             </div>
 

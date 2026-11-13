@@ -9,10 +9,10 @@ import java.util.Optional;
 public interface ApplicationRepository extends JpaRepository<Application, Long> {
 
     // Retrieve applications belonging to a specific user
-    List<Application> findAllByUser_Id(Long userId);
+    List<Application> findAllByUser_IdOrderByIdAsc(Long userId);
 
     // Search applications belonging to a specific user
-    List<Application> findAllByUser_IdAndCompanyNameContainingIgnoreCase(
+    List<Application> findAllByUser_IdAndCompanyNameContainingIgnoreCaseOrderByIdAsc(
             Long userId,
             String companyName
     );

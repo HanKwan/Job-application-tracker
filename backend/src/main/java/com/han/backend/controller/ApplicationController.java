@@ -45,7 +45,7 @@ public class ApplicationController {
 
         User user = getCurrentUser(authentication);
 
-        return applicationRepository.findAllByUser_Id(user.getId());
+        return applicationRepository.findAllByUser_IdOrderByIdAsc(user.getId());
     }
 
     // Create a new application under the logged-in user
