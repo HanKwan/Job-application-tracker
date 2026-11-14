@@ -42,7 +42,6 @@ export const deleteApplication = async (applicationId: number) => {
 }
 
 export const updateApplication = async (applicationId: number, application: CreateApplicationType) => {
-    
     const response = await fetch(API_URL + "/" + applicationId, {
         method: "PUT",
         credentials: "include",
@@ -51,7 +50,11 @@ export const updateApplication = async (applicationId: number, application: Crea
             ...await getCsrfHeaders()
         },
         body: JSON.stringify(application)
-    })
+    });
 
-    return response.json()
-}
+    if (!response.ok) {
+        throw new Error("Failed to update application");
+    }
+
+    return response.json();
+};

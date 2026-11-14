@@ -86,7 +86,7 @@ public class ApplicationController {
         User user = getCurrentUser(authentication);
 
         return applicationRepository
-                .findAllByUser_IdAndCompanyNameContainingIgnoreCase(
+                .findAllByUser_IdAndCompanyNameContainingIgnoreCaseOrderByIdAsc(
                         user.getId(),
                         companyName
                 );
