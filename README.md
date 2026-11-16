@@ -24,7 +24,7 @@ The application includes user authentication and ownership-based access control 
 
 **Registration**
 
-<img src="./demo/registration.gif" width="700" />
+<img src="./demo/register.gif" width="700" />
 
 **Login**
 
@@ -48,7 +48,7 @@ The application includes user authentication and ownership-based access control 
 
 **Delete Application**
 
-<img src="./demo/delete.gif" width="700" />
+<img src="./demo/delete-application.gif" width="700" />
 
 ### 3. Application Tracking
 
