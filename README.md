@@ -1,72 +1,121 @@
 # Job Application Tracker
 
-就職活動の応募状況を管理するフルスタックWebアプリケーションです。
+A full-stack web application for managing job applications and tracking recruitment progress.
 
-A full-stack web application for managing job applications and tracking their progress.
+就職活動における応募情報や選考状況を管理するフルスタックWebアプリケーションです。
 
 ---
 
-## Features / 主な機能
+## Overview
 
-- Add, view, edit, and delete job applications
-- Search and filter applications
+Job Application Tracker helps users organize their job search in one place. Users can manage applications, track recruitment progress, and keep their application information organized through an interactive Kanban-style board.
+
+The application includes user authentication and ownership-based access control to ensure that each user's application data remains private.
+
+## Features
+
+### 1. User Authentication
+
 - User registration and login
 - Session-based authentication
 - Password hashing with BCrypt
-- Associate applications with individual users
-- Restrict application access based on ownership
-- REST API communication between frontend and backend
-- MySQL database persistence
+- CSRF protection
+- User-specific data access
+
+**Registration**
+
+![Registration](demo/registration.gif)
+
+**Login**
+
+![Login](demo/login.gif)
+
+### 2. Application Management
+
+- Create new job applications
+- View application details
+- Edit existing application information
+- Delete applications
+- Record company names, positions, application dates, and notes
+
+**Add Application**
+
+![Add Application](demo/add-application.gif)
+
+**Edit Application**
+
+![Edit Application](demo/edit-application.gif)
+
+**Delete Application**
+
+![Delete Application](demo/delete-application.gif)
+
+### 3. Application Tracking
+
+- Kanban-style application board
+- Organize applications by recruitment status
+- Move applications between stages using drag and drop
+- Search applications by company name
+
+**Drag and Drop**
+
+![Drag and Drop](demo/drag-and-drop.gif)
+
+**Search Applications**
+
+![Search](demo/search.gif)
 
 ---
 
-## Tech Stack / 使用技術
+## Tech Stack
 
-### Frontend
+| Category | Technologies |
+|---|---|
+| Frontend | React 19, TypeScript, Vite, CSS |
+| Backend | Java 21, Spring Boot, Spring Data JPA |
+| Database | MySQL |
+| Authentication | HTTP Session, BCrypt |
+| Security | CSRF Protection, Ownership-based Access Control |
+| Communication | REST API |
 
-- React
-- TypeScript
-- Vite
-- CSS
+## Architecture
 
-### Backend
+The application follows a frontend-backend architecture.
 
-- Java
-- Spring Boot
-- Spring Data JPA
-- REST API
-- BCrypt
-- Session-based authentication
+**Frontend**
+- React handles the user interface and application state.
+- Communicates with the backend through REST APIs.
 
-### Database
+**Backend**
+- Spring Boot handles business logic and API requests.
+- Spring Data JPA manages database operations.
+- Handles authentication, session management, and authorization.
 
-- MySQL
+**Database**
+- MySQL stores user accounts and job application records.
+- Each application is associated with its owner through a user relationship.
 
----
+## What I Learned
 
-## What I Learned / 学んだこと
-
-- Building a full-stack application with React and Spring Boot
+- Building a full-stack application using React and Spring Boot
 - Designing and implementing REST APIs
-- Implementing CRUD operations and search functionality
-- Implementing user authentication and session management
-- Designing relationships between users and application records
-- Applying ownership-based access control
-- Connecting the frontend, backend, and MySQL database
+- Managing frontend and backend communication
+- Implementing session-based authentication
+- Understanding password hashing and CSRF protection
+- Designing relational database structures
+- Implementing ownership-based authorization
+- Organizing application components and backend services
 
----
+## Future Improvements
 
-## Future Improvements / 今後の改善
+- Application sorting and advanced filtering
+- Recruitment deadline and email tracking
+- To-do and memo features
+- AI-powered job description analysis
+- Docker containerization
+- Cloud deployment using AWS
 
-- Application sorting by application date, deadline, or company name
-- Email management
-- To-do and memo features for managing recruitment tasks
-- Dockerization
-- Deployment using AWS or another cloud platform
-
----
-
-## Running Locally / 起動方法
+## Running Locally
 
 ### Prerequisites
 
@@ -74,23 +123,47 @@ A full-stack web application for managing job applications and tracking their pr
 - Java 21
 - MySQL
 
-### Database Setup
+### 1. Clone the repository
+
+```bash
+git clone https://github.com/HanKwan/Job-application-tracker.git
+cd Job-application-tracker
+```
+
+### 2. Database Setup
+
+Create the MySQL database:
 
 ```sql
 CREATE DATABASE job_tracker;
 ```
 
-### Backend Setup
+Configure the database connection in the backend application configuration.
+
+### 3. Start the Backend
+
+For Windows:
+
+```bash
+cd backend
+mvnw.cmd spring-boot:run
+```
+
+For macOS / Linux:
 
 ```bash
 cd backend
 ./mvnw spring-boot:run
 ```
 
-### Frontend Setup
+### 4. Start the Frontend
+
+Open another terminal:
 
 ```bash
 cd frontend
 npm install
 npm run dev
 ```
+
+Open the local URL displayed by Vite in your terminal.
