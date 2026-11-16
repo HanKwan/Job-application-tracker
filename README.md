@@ -24,11 +24,11 @@ The application includes user authentication and ownership-based access control 
 
 **Registration**
 
-![Registration](demo/registration.gif)
+<img src="./demo/registration.gif" width="700" />
 
 **Login**
 
-![Login](demo/login.gif)
+<img src="./demo/login.gif" width="700" />
 
 ### 2. Application Management
 
@@ -40,15 +40,15 @@ The application includes user authentication and ownership-based access control 
 
 **Add Application**
 
-![Add Application](demo/add-application.gif)
+<img src="./demo/add-application.gif" width="700" />
 
 **Edit Application**
 
-![Edit Application](demo/edit-application.gif)
+<img src="./demo/edit-application.gif" width="700" />
 
 **Delete Application**
 
-![Delete Application](demo/delete-application.gif)
+<img src="./demo/delete.gif" width="700" />
 
 ### 3. Application Tracking
 
@@ -59,11 +59,11 @@ The application includes user authentication and ownership-based access control 
 
 **Drag and Drop**
 
-![Drag and Drop](demo/drag-and-drop.gif)
+<img src="./demo/drag-and-drop.gif" width="700" />
 
 **Search Applications**
 
-![Search](demo/search.gif)
+<img src="./demo/search.gif" width="700" />
 
 ---
 
