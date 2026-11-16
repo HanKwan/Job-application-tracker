@@ -12,7 +12,7 @@ function Register({ onRegisterSuccess }: RegisterProps) {
     const [errorMessage, setErrorMessage] = useState("");
     const [isSubmitting, setIsSubmitting] = useState(false);
 
-    const handleSubmit = async (event: React.FormEvent<HTMLFormElement>) => {
+    const handleSubmit = async (event: React.SubmitEvent<HTMLFormElement>) => {
         event.preventDefault();
         setErrorMessage("");
 
@@ -38,47 +38,78 @@ function Register({ onRegisterSuccess }: RegisterProps) {
     };
 
     return (
-        <div className="register-page">
-            <form className="register-form" onSubmit={handleSubmit}>
-                <h2 className="register-title">Create Account</h2>
+        <div className="auth-page">
+            <form className="auth-card" onSubmit={handleSubmit}>
+                <div className="auth-heading">
+                    <h2 className="auth-title">Create your account</h2>
+                    <p className="auth-description">
+                        Start organizing your job search.
+                    </p>
+                </div>
 
-                {errorMessage && <p role="alert">{errorMessage}</p>}
+                {errorMessage && (
+                    <p className="auth-error" role="alert">
+                        {errorMessage}
+                    </p>
+                )}
 
-                <div className="register-field">
-                    <label htmlFor="register-email">Email</label>
+                <div className="auth-field">
+                    <label className="auth-label" htmlFor="register-email">
+                        Email
+                    </label>
                     <input
+                        className="auth-input"
                         id="register-email"
+                        name="email"
                         type="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                         required
                     />
                 </div>
 
-                <div className="register-field">
-                    <label htmlFor="register-password">Password</label>
+                <div className="auth-field">
+                    <label className="auth-label" htmlFor="register-password">
+                        Password
+                    </label>
                     <input
+                        className="auth-input"
                         id="register-password"
+                        name="password"
                         type="password"
+                        placeholder="Create a password"
+                        autoComplete="new-password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         required
                     />
                 </div>
 
-                <div className="register-field">
-                    <label htmlFor="confirm-password">Confirm Password</label>
+                <div className="auth-field">
+                    <label className="auth-label" htmlFor="confirm-password">
+                        Confirm Password
+                    </label>
                     <input
+                        className="auth-input"
                         id="confirm-password"
+                        name="confirmPassword"
                         type="password"
+                        placeholder="Confirm your password"
+                        autoComplete="new-password"
                         value={confirmPassword}
                         onChange={(event) => setConfirmPassword(event.target.value)}
                         required
                     />
                 </div>
 
-                <button type="submit" disabled={isSubmitting}>
-                    {isSubmitting ? "Creating account..." : "Register"}
+                <button
+                    className="auth-button"
+                    type="submit"
+                    disabled={isSubmitting}
+                >
+                    {isSubmitting ? "Creating account..." : "Create Account"}
                 </button>
             </form>
         </div>

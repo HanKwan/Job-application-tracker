@@ -31,43 +31,60 @@ function Login({ onLoginSuccess }: LoginProps) {
     };
 
     return (
-        <div className="login-page">
-            <form className="login-form" onSubmit={handleSubmit}>
-                <h2 className="login-title">Login</h2>
+        <div className="auth-page">
+            <form className="auth-card" onSubmit={handleSubmit}>
+                <div className="auth-heading">
+                    <h2 className="auth-title">Welcome back</h2>
+                    <p className="auth-description">
+                        Sign in to continue tracking your applications.
+                    </p>
+                </div>
 
-                {errorMessage && <p role="alert">{errorMessage}</p>}
+                {errorMessage && (
+                    <p className="auth-error" role="alert">
+                        {errorMessage}
+                    </p>
+                )}
 
-                <div className="login-field">
-                    <label className="login-label" htmlFor="email">
+                <div className="auth-field">
+                    <label className="auth-label" htmlFor="email">
                         Email
                     </label>
                     <input
-                        className="login-input"
+                        className="auth-input"
                         id="email"
                         name="email"
                         type="email"
+                        placeholder="you@example.com"
+                        autoComplete="email"
                         value={email}
                         onChange={(event) => setEmail(event.target.value)}
                         required
                     />
                 </div>
 
-                <div className="login-field">
-                    <label className="login-label" htmlFor="password">
+                <div className="auth-field">
+                    <label className="auth-label" htmlFor="password">
                         Password
                     </label>
                     <input
-                        className="login-input"
+                        className="auth-input"
                         id="password"
                         name="password"
                         type="password"
+                        placeholder="Enter your password"
+                        autoComplete="current-password"
                         value={password}
                         onChange={(event) => setPassword(event.target.value)}
                         required
                     />
                 </div>
 
-                <button className="login-button" type="submit" disabled={isSubmitting}>
+                <button
+                    className="auth-button"
+                    type="submit"
+                    disabled={isSubmitting}
+                >
                     {isSubmitting ? "Logging in..." : "Login"}
                 </button>
             </form>

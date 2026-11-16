@@ -118,11 +118,11 @@
     border-color: #69776a;
 }
 
-
 .detail-modal-actions {
     display: flex;
-    justify-content: flex-end;
+    justify-content: center;
     align-items: center;
+    flex-direction: row-reverse;
     gap: 8px;
     padding-top: 16px;
 }
@@ -166,15 +166,26 @@
 }
 
 .modal-btn-danger-outline {
-    background: transparent;
-    color: #a94f43;
-    transition: color 0.18s ease, opacity 0.18s ease;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 6px;
+    min-height: 30px;
+    padding: 3px 13px;
+    border: 1px solid #f0d0ce;
+    border-radius: 20px;
+    background-color: #fce8e6;
+    color: #b94a48;
+    font-size: 13px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.2s ease;
 }
 
 .modal-btn-danger-outline:hover:not(:disabled) {
-    background: transparent;
-    color: #d14b3e;
-    opacity: 0.85;
+    background-color: #f5d1ce;
+    border-color: #e8b5b1;
+    color: #963b39;
 }
 
 .modal-btn-danger {
@@ -191,6 +202,7 @@
 .delete-confirm-actions {
     display: flex;
     justify-content: center;
+    flex-direction: row-reverse;
     gap: 8px;
     margin-top: 24px;
 }

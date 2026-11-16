@@ -148,7 +148,8 @@ function Home({ onLogout }: HomeProps) {
                         className="add-application-btn"
                         onClick={() => setIsAddModalOpen(true)}
                     >
-                        + Add Application
+                        <span className="add-btn-full">+ Add Application</span>
+                        <span className="add-btn-short">+ Add</span>
                     </button>
                 </div>
 

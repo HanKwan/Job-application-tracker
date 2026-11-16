@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import "./css/App.css";
+import "./css/Auth.css";
 import Home from "./pages/Home";
 import Login from "./pages/Login";
 import Register from "./pages/Register";
@@ -66,16 +67,19 @@ function App() {
     }
 
     return (
-        <main className="app-shell">
+        <main className="app-shell auth-shell">
             <header className="app-header">
-                <p className="app-eyebrow">YOUR PERSONAL WORKSPACE</p>
-                <h1 className="app-title">Job Application Tracker</h1>
+                <h1 className="app-title">Job Tracker</h1>
                 <p className="app-subtitle">
-                    Keep track of your journey, one step at a time.
+                    Keep your job search organized.
                 </p>
             </header>
 
-            {sessionError && <p role="alert">{sessionError}</p>}
+            {sessionError && (
+                <p className="auth-error" role="alert">
+                    {sessionError}
+                </p>
+            )}
 
             {authMode === "login" ? (
                 <>
@@ -86,7 +90,7 @@ function App() {
                         }}
                     />
 
-                    <p>
+                    <p className="auth-switch">
                         Don't have an account?{" "}
                         <button
                             type="button"
@@ -108,7 +112,7 @@ function App() {
                         }}
                     />
 
-                    <p>
+                    <p className="auth-switch">
                         Already have an account?{" "}
                         <button
                             type="button"
